@@ -1,16 +1,10 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px src="#" alt="project logo" style=></a>
-</p>
+![project logo]()
 
-<h2 align="center">Smart Interview Processing</h2>
 
-<div align="center">
+### Smart Interview Processing
 
-<!-- [![license](https://img.shields.io/github/license/nhnent/tui.editor.svg)](#) -->
-<!-- [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) -->
 
-</div>
+
 
 ------------------------------------------
 
@@ -45,7 +39,6 @@
 ### Contributing
 
  We're are open to `enhancements` & `bug-fixes` :smile:
- <!-- Also do have a look [here](./CONTRIBUTING.md) -->
 
 ------------------------------------------
 ### Note
