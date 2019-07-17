@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LoginModule } from './login/login.module';
 import { InterviewerModule} from './interviewer/interviewer.module'
+import { HrModule } from './hr/hr.module'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { InterviewerModule} from './interviewer/interviewer.module'
     BrowserModule,
     LoginModule,
     InterviewerModule,
+    HrModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],

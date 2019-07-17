@@ -1,37 +1,51 @@
 <div class="container my-1">
         <p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
+        <!--
+
+                MODAL
+
+        -->
+
 
         <ng-template #content let-modal>
                 <div class="modal-header">
-                        <h4 class="modal-title" id="modal-basic-title">Add slot</h4>
+                        <h4 class="modal-title" id="modal-basic-title">Schedule Interview</h4>
                         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                                 <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
                 <div class="modal-body">
+                        <h4>
+                                <span class="badge badge-info">{{slotDate}}</span> &nbsp;
+                                <span class="badge badge-info">{{startTime}}</span> &nbsp;
+                                <span class="badge badge-info">{{endTime}}</span>
+                        </h4>
+
                         <form [formGroup]="slotForm" (submit)="formSubmit()">
 
                                 <mat-form-field>
                                         <input matInput [matDatepicker]="picker" placeholder="Choose a date"
                                                 formControlName="slotDate" style="z-index: 1050 !important">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                        </mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                                 <hr>
 
                                 <mat-form-field class="example-full-width">
-                                        <input matInput type="time" placeholder="Start Time" formControlName="startTime">
+                                        <input matInput type="time" placeholder="Start Time"
+                                                formControlName="startTime">
                                 </mat-form-field>
 
-                                <hr>
+                                &nbsp;
                                 <mat-form-field class="example-full-width">
                                         <input matInput type="time" placeholder="End Time" formControlName="endTime">
                                 </mat-form-field>
                         </form>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Add
-                                slot</button>
+                        <button type="button" class="btn btn-outline-dark"
+                                (click)="modal.close('Save click')">Submit</button>
                 </div>
         </ng-template>
 
