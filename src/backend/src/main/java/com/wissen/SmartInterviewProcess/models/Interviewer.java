@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-@Entity
+@Entity(name="interviewer")
 public class Interviewer {
 
 	@Id
