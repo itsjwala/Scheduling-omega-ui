@@ -51,6 +51,7 @@ insert into available_slot(from_timestamp,to_timestamp,interviewer_id) values('2
 insert into available_slot(from_timestamp,to_timestamp,interviewer_id) values('2019-07-16 02:00:00','2019-07-16 03:00:00',2);
 insert into available_slot(from_timestamp,to_timestamp,interviewer_id) values('2019-07-17 02:00:00','2019-07-17 03:00:00',2);
 insert into available_slot(from_timestamp,to_timestamp,interviewer_id) values('2019-07-18 02:00:00','2019-07-18 03:00:00',2);
+insert into available_slot(from_timestamp,to_timestamp,interviewer_id,active) values('2019-07-18 08:00:00','2019-07-18 09:00:00',1,0);
 
 
 
