@@ -57,11 +57,11 @@ insert into available_slot(from_timestamp,to_timestamp,interviewer_id,active) va
 
 
 
--- insert into schedule_slot(interview_description,candidate_id,hr_id,interviewer_id,slot_id,level_id,technology_id)
--- values('room 314',1,5,1,1,1,1);
+insert into schedule_slot(interview_description,candidate_id,hr_id,interviewer_id,slot_id,level_id,technology_id)
+values('room 314',1,5,1,1,1,1);
 
--- insert into schedule_slot(interview_description,candidate_id,hr_id,interviewer_id,slot_id,level_id,technology_id)
--- values('room 314',1,5,1,2,1,2);
+insert into schedule_slot(interview_description,candidate_id,hr_id,interviewer_id,slot_id,level_id,technology_id)
+values('room 314',1,5,1,2,1,2);
 
 
 
