@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit {
 
   closeResult: string;
 
-  slotForm: FormGroup;
+  scheduleForm: FormGroup;
 
   startTime;
   endTime;
@@ -41,29 +41,22 @@ export class CalendarComponent implements OnInit {
     this.events = this.hrSvc.initializeEvents();
     this.options = this.hrSvc.initializeOptions();
 
-
     this.options = {
       ...this.options,
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       eventClick: (event) => {
         this.open(this.content, event.event);
         console.log(event);
-        
-        // console.log(event.event);
-        
-
-      }
+        }
     };
 
-    this.slotForm = this.hrSvc.slotForm();
-
-
-
+    this.scheduleForm = this.hrSvc.scheduleForm();
   }
 
 
   open(content, event) {
     console.log(event);
+    console.log(event._def.extendedProps);
 
     let start = event.start;
     let end = event.end;
@@ -75,26 +68,13 @@ export class CalendarComponent implements OnInit {
     
       this.slotDate = `${event.start.getDate()}/${event.start.getMonth()}/${event.start.getFullYear()}`;
 
-    this.slotForm.patchValue({
-      slotDate: event.start,
-      startTime: this.startTime,
-      endTime: this.endTime
-    });
-
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       console.log(result);
-      console.log(this.slotForm.value);
-
-
+      console.log(this.scheduleForm.value);
     }, (reason) => {
       console.log("Closed");
 
     });
-  }
-
-  formSubmit() {
-    console.log(this.slotForm.value);
-
   }
 
 }

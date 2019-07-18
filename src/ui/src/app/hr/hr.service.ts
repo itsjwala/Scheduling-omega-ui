@@ -33,7 +33,8 @@ export class HrService {
         "title": "Anirudh",
         "start": "2019-07-17T12:00:00",
         "end": "2019-07-17T14:00:00",
-        "round": "R1"
+        "round": "R1",
+        "technology": "Java"
       }
     ];
   }
@@ -60,15 +61,18 @@ export class HrService {
         minute: '2-digit',
       },
       selectable: true,
-      
+
     };
   }
 
-  slotForm() {
+  scheduleForm() {
     return this.fb.group({
-      slotDate: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required]
+      candidateName: ['', Validators.required],
+      candidatePh: ['', Validators.required],
+      candidateCV: ['', Validators.required],
+      interviewDescr: [''],
+      round: ['', Validators.required],
+      technology: ['', Validators.required]
     })
   }
 }

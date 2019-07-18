@@ -63,6 +63,26 @@ export class InterviewerService {
     };
   }
 
+  smallCalendarOptions() {
+    return {
+      defaultDate: new Date(),
+      height: window.innerHeight*0.5,
+      header: {
+        left: 'prev,next',
+        center: '',
+        right: 'title'
+      },
+      hiddenDays: [0],
+      defaultView: 'dayGridMonth',
+      allDaySlot: false,
+      aspectRatio: 1.09,
+      showNonCurrentDates: false,
+      fixedWeekCount: false,
+      selectable: true,
+
+    };
+  }
+
   slotForm() {
     return this.fb.group({
       slotDate: ['', Validators.required],
