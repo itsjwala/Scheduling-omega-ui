@@ -37,7 +37,7 @@ public class AvailableSlotRepositoryTest {
 		LocalDateTime from = LocalDateTime.now();
 		LocalDateTime to = LocalDateTime.now().plusDays(1);
 		System.out.println("getting recors between date: "+from);
-		repo.getAllBetween(from, to,false,true).forEach(e->{
+		repo.getAllBetween(from, to,true).forEach(e->{
 			
 			System.out.println(e);
 		});
@@ -50,7 +50,7 @@ public class AvailableSlotRepositoryTest {
 		LocalDateTime from = LocalDateTime.of(2019,7,16,5,0,0);
 		LocalDateTime to = LocalDateTime.of(2019,7,16,8,0,0);
 		System.out.println("getting recors between date: "+from);
-		repo.getAllBetween(from, to,true,true).forEach(e->{
+		repo.getAllBetween(from, to,true).forEach(e->{
 			
 			System.out.println(e);
 		});
