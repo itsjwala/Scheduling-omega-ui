@@ -29,7 +29,7 @@ public class ScheduleSlot {
 
 	private String interviewDescription;
 
-	private boolean cancelled;
+	private boolean cancelled=false;
 
 	private String cancellationReason;
 
@@ -39,9 +39,9 @@ public class ScheduleSlot {
 	@JoinColumn(name = "candidate_id")
 	private Candidate candidate;
 
-	private boolean active;
+	private boolean active=true;
 
-	private Status status;
+	private Status status=Status.PENDING;
 	@ManyToOne
 	private Level level;
 	@ManyToOne

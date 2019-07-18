@@ -2,6 +2,7 @@ package com.wissen.SmartInterviewProcess.models;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,9 @@ public class AvailableSlot {
 	@JoinColumn(name="interviewer_id")
 	private Interviewer interviewer;
 	
-	private boolean scheduled;
+	private boolean scheduled=false;
 
-	private boolean active;
+	private boolean active=true;
 
 	public long getId() {
 		return id;
