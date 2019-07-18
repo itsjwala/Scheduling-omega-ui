@@ -21,31 +21,48 @@
                                 <span class="badge badge-info">{{endTime}}</span>
                         </h4>
 
-                        <form [formGroup]="slotForm" (submit)="formSubmit()">
+                        <form [formGroup]="scheduleForm">
 
-                                <mat-form-field>
-                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date"
-                                                formControlName="slotDate" style="z-index: 1050 !important">
-                                        <mat-datepicker-toggle matSuffix [for]="picker">
-                                        </mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
+                                <mat-form-field class="example-full-width" style="width: 48%">
+                                        <input matInput placeholder="Candidate Name"
+                                                formControlName="candidateName">
                                 </mat-form-field>
-                                <hr>
 
-                                <mat-form-field class="example-full-width">
-                                        <input matInput type="time" placeholder="Start Time"
-                                                formControlName="startTime">
+                                &nbsp;                                
+
+                                <mat-form-field class="example-full-width" style="width: 48%">
+                                        <input matInput placeholder="Candidate Phone no."
+                                                formControlName="candidatePh">
                                 </mat-form-field>
 
                                 &nbsp;
                                 <mat-form-field class="example-full-width">
-                                        <input matInput type="time" placeholder="End Time" formControlName="endTime">
+                                        <input matInput placeholder="Candidate CV" formControlName="candidateCV">
                                 </mat-form-field>
+
+                                <hr>
+
+                                <mat-form-field class="example-full-width" style="width: 48%">
+                                        <input matInput placeholder="Round" formControlName="round">
+                                </mat-form-field>
+
+                                &nbsp;
+
+                                <mat-form-field class="example-full-width" style="width: 48%">
+                                        <input matInput placeholder="Technology" formControlName="technology">
+                                </mat-form-field>
+
+                                <hr>
+
+                                <mat-form-field class="example-full-width" style="width: 100%">
+                                        <input matInput placeholder="Description" formControlName="interviewDescr">
+                                </mat-form-field>
+
                         </form>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark"
-                                (click)="modal.close('Save click')">Submit</button>
+                        <button type="submit" class="btn btn-outline-dark"
+                                (click)="modal.close('Save click')" [disabled]="!scheduleForm.valid">Submit</button>
                 </div>
         </ng-template>
 
