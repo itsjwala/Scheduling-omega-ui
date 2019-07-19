@@ -34,11 +34,7 @@ export class CalendarComponent implements OnInit {
   slotForm: FormGroup;
 
 
-<<<<<<< HEAD
   constructor(private interviewerSvc: InterviewerService, private snackBar: MatSnackBar) { }
-=======
-  constructor(private modalService: NgbModal, private interviewerSvc: InterviewerService, private snackBar:  MatSnackBar) { }
->>>>>>> controller
 
 
   ngOnInit() {
