@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { InterviewerService } from '../interviewer.service';
 
@@ -48,7 +47,7 @@ export class CalendarComponent implements OnInit {
       ...this.options,
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       select: (event) => {
-        this.open(this.content, event);
+        this.open( event);
       }
     };
 
@@ -68,7 +67,7 @@ export class CalendarComponent implements OnInit {
   }
 
 
-  open(content, event) {
+  open( event) {
 
     let start = event.start;
     let end = event.end;
