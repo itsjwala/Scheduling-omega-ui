@@ -1,52 +1,27 @@
-![project logo]()
+# Ui
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
-### Smart Interview Processing
+## Development server
 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-------------------------------------------
+## Build
 
->Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi deserunt laboriosam impedit, asperiores quae. Aut sapiente quam eaque pariatur quasi.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
->Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio mollitia sapiente facilis provident sed, magnam animi ea at laborum. Doloremque.
+## Running unit tests
 
->Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum placeat reiciendis quae fugiat quibusdam ratione deleniti sunt odit tempora explicabo.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Running end-to-end tests
 
-------------------------------------------
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-### Features
+## Further help
 
-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, labore!
-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur nobis vero sed, recusandae dignissimos illo.
-
-
-
-### Project Demo
-
-
-------------------------------------------
-### Run it on your machine
-
-
-
-------------------------------------------
-
-
-------------------------------------------
-### Contributing
-
- We're are open to `enhancements` & `bug-fixes` :smile:
-
-------------------------------------------
-### Note
-
-
-------------------------------------------
-### Meet our team: Meeseeks
-
-- [Jigar Wala](#)
-- [Anirudh Balakka](#)
-- [Prithviraj Morya](#)
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
