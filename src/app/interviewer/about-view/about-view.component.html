@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body" style="padding: 0px;">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card" id="side" style="background-color: #7386D5;">
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 info-data">
+          <div class="container profile">
+            <p class="heading">Name Surname</p>
+            <p class="info" *ngIf="!editName" (dblclick)="toggleName()">{{user.name}}</p>
+            <input *ngIf="editName" [(ngModel)]="user.name" (dblclick)="toggleName()">
+            <br>
+            <p class="heading">Position</p>
+            <p class="info" *ngIf="!editPosition" (dblclick)="togglePosition()"> {{user.position}}</p>
+            <input *ngIf="editPosition" [(ngModel)]="user.position">
+            <br>
+            <p class="heading">Employee Id</p>
+            <p class="info"> {{user.id}}</p>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="heading">Successful Interviews</p>
+                <p class="info">{{user.successful}}</p>
+              </div>
+              <div class="col-md-6">
+                <p class="heading">Unsuccessful Interviews</p>
+                <p class="info">50</p>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" 
+  class="btn btn-info save" 
+  (click)="sendInfo(user)"
+  *ngIf="editName || editPosition">Save</button>
+</div>

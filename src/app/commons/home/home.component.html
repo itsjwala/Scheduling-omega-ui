@@ -1,0 +1,56 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar" [ngClass]="sideBar? 'active': ''">
+        <div class="sidebar-header" (click)="toggleSidebar()">
+            <h3>Bootstrap Sidebar</h3>
+            <strong>BS</strong>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a routerLink=''>
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </li> 
+            <li>
+                <a href="#">
+                    <i class="fa fa-briefcase"></i>
+                    About
+                </a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fa fa-copy"></i>
+                    Actions
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Give Slot</a>
+                    </li>
+                    <li>
+                        <a href="#">Add feddback</a>
+                    </li>
+                    <li>
+                        <a routerLink="previous">Previous Schedule</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a routerLink='portfolio'>
+                    <i class="fa fa-image"></i>
+                    Portfolio
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-question"></i>
+                    FAQ
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

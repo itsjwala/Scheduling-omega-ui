@@ -2,6 +2,8 @@
 @import '../node_modules/primeicons/primeicons.css';
 /* @import '../node_modules/primeng/resources/themes/nova-light/theme.css'; */
 
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 @import '../node_modules/@fullcalendar/core/main.css';
 @import '../node_modules/@fullcalendar/daygrid/main.css';
 @import '../node_modules/@fullcalendar/timegrid/main.css';
@@ -9,6 +11,9 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../node_modules/font-awesome/css/font-awesome.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 
 *  {
     max-width: 100%;

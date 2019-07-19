@@ -1,0 +1,10 @@
+.heading{
+    font-size: 13px;
+    margin: 0rem;
+    opacity: 0.4;
+    color: #7386D5;
+}
+
+.heading :hover{
+    opacity: 1;
+}
