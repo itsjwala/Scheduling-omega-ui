@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { InterviewerService } from '../interviewer.service';
 
@@ -33,7 +34,11 @@ export class CalendarComponent implements OnInit {
   slotForm: FormGroup;
 
 
+<<<<<<< HEAD
   constructor(private interviewerSvc: InterviewerService, private snackBar: MatSnackBar) { }
+=======
+  constructor(private modalService: NgbModal, private interviewerSvc: InterviewerService, private snackBar:  MatSnackBar) { }
+>>>>>>> controller
 
 
   ngOnInit() {
