@@ -6,12 +6,11 @@ import { RouterModule } from '@angular/router';
 
 import { ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from '../material/material.module';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { DialogModule } from 'primeng/dialog';
-import { MatNativeDateModule } from '@angular/material';
 import { DashComponent } from './dash/dash.component';
 
 
@@ -22,8 +21,7 @@ import { DashComponent } from './dash/dash.component';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+    MatSnackBarModule,
     FullCalendarModule,
     RouterModule,
     DialogModule

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { InterviewerService } from '../interviewer.service';
 
@@ -33,7 +34,7 @@ export class CalendarComponent implements OnInit {
   slotForm: FormGroup;
 
 
-  constructor(private modalService: NgbModal, private interviewerSvc: InterviewerService) { }
+  constructor(private modalService: NgbModal, private interviewerSvc: InterviewerService, private snackBar:  MatSnackBar) { }
 
 
   ngOnInit() {
@@ -60,7 +61,7 @@ export class CalendarComponent implements OnInit {
       ...this.smallCalendarOptions,
       plugins: [dayGridPlugin, interactionPlugin],
       dateClick: (event) => {
-        this.calendar.getCalendar().gotoDate(event.date);         
+        this.calendar.getCalendar().gotoDate(event.date);
       }
     }
 
@@ -82,18 +83,13 @@ export class CalendarComponent implements OnInit {
       endTime: endTime
     });
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      console.log(result);
-      console.log(this.slotForm.value);
-    }, (reason) => {
-      console.log("Closed");
-
-    });
+    this.openSnackBar();
   }
 
-  formSubmit() {
-    console.log(this.slotForm.value);
-
+  openSnackBar() {
+    this.snackBar.open("Added Slot", "Dismiss", {
+      duration: 3500
+    })
   }
 
 

@@ -15,13 +15,11 @@ import { HrModule } from './hr/hr.module'
 import { HrRoutingModule } from './hr/hr-routing.module';
 import { InterviewerRoutingModule } from './interviewer/interviewer-routing.module';
 import { LoginRoutingModule } from './login/login-router.module';
-import { DashComponent } from './dash/dash.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashComponent
   ],
   imports: [
     BrowserModule,
