@@ -12,8 +12,7 @@ const commonRoutes: Routes = [
         children:
             [
                 { path: 'previous', component: PreviousScheduleComponent },
-                { path: 'about', component: AboutViewComponent},
-                { path: 'portfolio', component: AboutViewComponent}
+                { path: 'portfolio', component: AboutViewComponent }
             ]
     }
 ];
