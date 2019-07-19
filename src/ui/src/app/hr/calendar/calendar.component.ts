@@ -8,6 +8,7 @@ import { HrService } from '../hr.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { FullCalendar } from 'primeng/fullcalendar';
 
 @Component({
   selector: 'hr-calendar',
@@ -18,10 +19,14 @@ import interactionPlugin from '@fullcalendar/interaction';
 export class CalendarComponent implements OnInit {
 
   @ViewChild('content', { static: false }) private content: ElementRef;
+  @ViewChild('calendar', { static: false }) calendar: FullCalendar;
+
 
   events: any[];
 
   options: any;
+
+  smallCalendarOptions: any;
 
   display: boolean = false;
 
@@ -49,6 +54,15 @@ export class CalendarComponent implements OnInit {
         console.log(event);
         }
     };
+
+    this.smallCalendarOptions = this.hrSvc.smallCalendarOptions();
+    this.smallCalendarOptions = {
+      ...this.smallCalendarOptions,
+      plugins: [dayGridPlugin, interactionPlugin],
+      dateClick: (event) => {
+        this.calendar.getCalendar().gotoDate(event.date);         
+      }
+    }
 
     this.scheduleForm = this.hrSvc.scheduleForm();
   }
