@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { FormGroup } from '@angular/forms';
 
 import { InterviewerService } from '../interviewer.service';
@@ -17,7 +18,6 @@ import { FullCalendar } from 'primeng/fullcalendar';
 })
 export class CalendarComponent implements OnInit {
 
-  @ViewChild('content', { static: false }) private content: ElementRef;
   @ViewChild('calendar', { static: false }) calendar: FullCalendar;
 
   events: any[];
@@ -33,14 +33,12 @@ export class CalendarComponent implements OnInit {
   slotForm: FormGroup;
 
 
-  constructor(private modalService: NgbModal, private interviewerSvc: InterviewerService) { }
+  constructor(private interviewerSvc: InterviewerService, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
 
-
     this.events = this.interviewerSvc.initializeEvents();
-    console.log(this.events);
 
     this.options = this.interviewerSvc.initializeOptions();
 
@@ -60,7 +58,7 @@ export class CalendarComponent implements OnInit {
       ...this.smallCalendarOptions,
       plugins: [dayGridPlugin, interactionPlugin],
       dateClick: (event) => {
-        this.calendar.getCalendar().gotoDate(event.date);         
+        this.calendar.getCalendar().gotoDate(event.date);
       }
     }
 
@@ -82,18 +80,15 @@ export class CalendarComponent implements OnInit {
       endTime: endTime
     });
 
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      console.log(result);
-      console.log(this.slotForm.value);
-    }, (reason) => {
-      console.log("Closed");
+    console.log(event);
 
-    });
+    this.openSnackBar();
   }
 
-  formSubmit() {
-    console.log(this.slotForm.value);
-
+  openSnackBar() {
+    this.snackBar.open("Slot added successfully", "Dismiss", {
+      duration: 3000
+    })
   }
 
 

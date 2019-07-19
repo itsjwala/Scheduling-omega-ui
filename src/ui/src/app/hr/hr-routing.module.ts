@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CalendarComponent } from './calendar/calendar.component'
+import { DashComponent } from './dash/dash.component';
 
 const hrRoutes: Routes = [
     {
         path: 'hr',
-        component: CalendarComponent,
-        // children:
-        //     [
-        //         { path: '', component: CalendarComponent }
-        //     ]
+        component: DashComponent,
+        children:
+            [
+                { path: '', component: CalendarComponent }
+            ]
     }
 ];
 

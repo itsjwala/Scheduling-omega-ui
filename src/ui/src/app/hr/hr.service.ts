@@ -65,6 +65,25 @@ export class HrService {
     };
   }
 
+  smallCalendarOptions() {
+    return {
+      defaultDate: new Date(),
+      height: window.innerHeight*0.5,
+      header: {
+        left: 'prev,next',
+        center: '',
+        right: 'title'
+      },
+      hiddenDays: [0],
+      defaultView: 'dayGridMonth',
+      allDaySlot: false,
+      aspectRatio: 1.09,
+      showNonCurrentDates: false,
+      fixedWeekCount: false,
+      selectable: true,
+    };
+  }
+
   scheduleForm() {
     return this.fb.group({
       candidateName: ['', Validators.required],
