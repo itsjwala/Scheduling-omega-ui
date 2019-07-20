@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
@@ -12,8 +12,10 @@ import { SmallCalendarComponent } from './small-calendar/small-calendar.componen
 import { BigCalendarComponent } from './big-calendar/big-calendar.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarInteractionService } from './calendar-interaction.service';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule, MatAutocompleteModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatFormFieldControl, MatInputModule } from '@angular/material';
 import { ShowSnackBarService } from './show-snack-bar.service';
+import { FilterComponent } from './filter/filter.component';
+import { FilterService } from './filter.service';
 
 
 
@@ -23,12 +25,19 @@ import { ShowSnackBarService } from './show-snack-bar.service';
     PreviousScheduleComponent,
     AboutViewComponent,
     SmallCalendarComponent,
-    BigCalendarComponent
+    BigCalendarComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
     FullCalendarModule,
     MatSnackBarModule,
     AgGridModule.withComponents([]),
@@ -36,10 +45,12 @@ import { ShowSnackBarService } from './show-snack-bar.service';
   exports:[
     SmallCalendarComponent,
     BigCalendarComponent,
+    FilterComponent
     // CalendarInteractionService
   ],
   providers:[
-    ShowSnackBarService
+    ShowSnackBarService,
+    FilterService
   ]
 })
 export class CommonsModule { }

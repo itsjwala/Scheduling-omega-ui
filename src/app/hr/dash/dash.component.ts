@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
+import { ScheduleFormComponent } from '../schedule-form/schedule-form.component';
 
 @Component({
   selector: 'app-dash',
@@ -36,7 +37,7 @@ export class DashComponent implements OnInit {
   openDialog(showDelete, event?) {
 
 
-    const dialogRef = this.dialog.open(null, {
+    const dialogRef = this.dialog.open(ScheduleFormComponent, {
       data: showDelete
     });
 
