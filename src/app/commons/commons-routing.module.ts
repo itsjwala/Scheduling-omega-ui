@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { PreviousScheduleComponent } from './previous-schedule/previous-schedule.component';
+import { FullCalendar, FullCalendarModule } from 'primeng/fullcalendar';
 
 const commonRoutes: Routes = [
     {
@@ -19,7 +20,8 @@ const commonRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(commonRoutes)
+        RouterModule.forChild(commonRoutes),
+        FullCalendarModule
     ],
     exports: [
         RouterModule

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CalendarComponent } from './calendar/calendar.component';
+
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,13 +13,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { DialogModule } from 'primeng/dialog';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { DashComponent } from './dash/dash.component';
+import { CommonsModule } from '../commons/commons.module';
 
 
 
 @NgModule({
-  declarations: [CalendarComponent, DashComponent],
+  declarations: [DashComponent],
   imports: [
     CommonModule,
     NgbModule,
@@ -29,10 +30,12 @@ import { DashComponent } from './dash/dash.component';
     MatDatepickerModule,
     MatNativeDateModule,
     FullCalendarModule,
-    DialogModule
+    DialogModule,
+    CommonsModule,
+    MatDialogModule
   ],
   exports: [
-    CalendarComponent
+
   ]
 })
 export class HrModule { }

@@ -1,0 +1,4 @@
+p-fullCalendar::ng-deep .fc-body .fc-row {
+    min-height: 0.5rem;
+}
+

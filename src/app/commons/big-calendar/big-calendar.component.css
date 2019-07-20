@@ -1,0 +1,6 @@
+p-fullCalendar::ng-deep .fc-time-grid .fc-slats td{
+    color:grey;
+}
+p-fullCalendar::ng-deep .fc-time-grid .fc-slats td span{
+    font-size: 0.8rem;
+}

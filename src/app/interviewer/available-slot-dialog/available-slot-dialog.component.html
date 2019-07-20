@@ -1,0 +1,13 @@
+
+
+<h1 mat-dialog-title>{{ showDelete? "Delete Slot ?" :"Add Slot ?"}}</h1>
+
+<div mat-dialog-actions>
+<button *ngIf="!showDelete" class="btn btn-sm btn-warning" (click)="dialogRef.close('CONFIRM')">Confirm</button>
+
+<button *ngIf="showDelete" class="btn btn-sm btn-danger" (click)="dialogRef.close('DELETE')">Delete</button>
+
+&nbsp;&nbsp;
+
+<button class="btn btn-sm btn-light" (click)="dialogRef.close('CANCEL')">Cancel</button>
+</div>

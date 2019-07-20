@@ -2,11 +2,12 @@
 @import '../node_modules/primeicons/primeicons.css';
 /* @import '../node_modules/primeng/resources/themes/nova-light/theme.css'; */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
 
 @import '../node_modules/@fullcalendar/core/main.css';
 @import '../node_modules/@fullcalendar/daygrid/main.css';
 @import '../node_modules/@fullcalendar/timegrid/main.css';
+@import '../node_modules/@fullcalendar/list/main.css';
 
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../node_modules/font-awesome/css/font-awesome.css';
@@ -19,18 +20,24 @@
     max-width: 100%;
 }
 
-.fc h2 {
-    height: 3rem;
- }
 
- .smallCalendar h2{
-     font-size: 1.5rem;
- }
+ .fc-toolbar h2{
+     font-size: 1rem;
+}
 
-.smallCalendar .fc-body .fc-row { 
-    min-height: 2rem; 
+ .fc h2{
+     height: 1rem;
+}
+
+.fc-toolbar.fc-header-toolbar{
+    margin-bottom: 0.5rem;
+}
+
+
+.button-group{
+    font-size: 0.8rem;
 }
 
 
 
- 
+

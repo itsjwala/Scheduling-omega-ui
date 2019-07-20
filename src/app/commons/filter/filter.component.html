@@ -1,0 +1,69 @@
+<div class="card my-2 w-100">
+
+    <div class="card-header">Filters</div>
+    <div class="card-body">
+        <!-- <pre>
+            {{filterForm.value|json}}
+        </pre> -->
+        <form [formGroup]="filterForm">
+            <div class="row">
+                <div class="col-12">
+
+                    <mat-form-field>
+
+                        <input type="text" matInput
+                            placeholder="Interviewer Name" formControlName="interviewerName" [matAutocomplete]="auto">
+                    </mat-form-field>
+
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let interviewer of filteredInterviewerNames | async"
+                            [value]="interviewer.name">
+                            {{interviewer.name}}</mat-option>
+                    </mat-autocomplete>
+                    <div class="text-danger font-weight-light">{{errors.interviewerRequired}}</div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6 col-sm-6 col-md-12">
+
+                    <mat-form-field>
+                        <mat-label>Levels</mat-label>
+                        <mat-select formControlName="levelFields" multiple>
+                            <mat-option *ngFor="let level of levels" [value]="level.id">{{level.level}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-6 col-sm-6 col-md-12">
+
+                    <mat-form-field>
+                        <mat-label>Technologies</mat-label>
+                        <mat-select formControlName="technologyFields" multiple>
+                            <mat-option *ngFor="let technology of technologies" [value]="technology.id">
+                                {{technology.technology}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+
+                    <mat-checkbox formControlName="scheduled">Scheduled Interviews</mat-checkbox>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-12">
+
+                    <button class="btn btn-primary btn-sm mr-1" (click)="applyFilter($event)">Apply</button>
+                    <button class="btn btn-danger btn-sm" (click)="clearFilter($event)">Clear</button>
+
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
