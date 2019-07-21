@@ -46,14 +46,8 @@ export class DashComponent implements OnInit {
       eventClick: (event) => {
         console.log(event)
         this.openDialog(true,event);
-
-
       },
-
     };
-
-
-
   }
   openDialog(showDelete, event?){
 

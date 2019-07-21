@@ -2,41 +2,45 @@ import { Injectable } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
 
+import Data from './available-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HrService {
 
+  data = new Data();
   constructor(private fb: FormBuilder) { }
 
-  initializeEvents() {
+
+  getAvailbleSlots() {
     return [
       {
-        "title": "All Day Event",
-        "start": "2016-01-01"
-      },
-      {
-        "title": "Long Event",
-        "start": "2016-01-07",
-        "end": "2016-01-10"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2016-01-09T16:00:00"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2019-07-17T16:00:00"
-      },
-      {
-        "title": "Anirudh",
-        "start": "2019-07-17T12:00:00",
-        "end": "2019-07-17T14:00:00",
-        "round": "R1",
-        "technology": "Java"
-      }
-    ];
+        slotId: 1,
+        slot: {
+          from: '2019-07-23T05:00:00',
+          to: '2019-07-23T08:00:00'
+        },
+        interviewerId: 1,
+        interviewerName: 'jigar wala',
+        levels: [
+          {
+            id: 1,
+            level: 'R1'
+          }
+        ],
+        technologies: [
+          {
+            id: 1,
+            technology: 'Angular'
+          },
+          {
+            id: 2,
+            technology: 'Java'
+          }
+        ],
+        scheduled: false
+      }];
   }
 
   initializeOptions() {
@@ -68,7 +72,7 @@ export class HrService {
   smallCalendarOptions() {
     return {
       defaultDate: new Date(),
-      height: window.innerHeight*0.5,
+      height: window.innerHeight * 0.5,
       header: {
         left: 'prev,next',
         center: '',

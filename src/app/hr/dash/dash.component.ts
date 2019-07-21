@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
+import {CalenderService} from '../calender.service';
+
+
+import { ScheduleFormComponent } from './../schedule-form/schedule-form.component';
 
 @Component({
   selector: 'app-dash',
@@ -9,35 +13,39 @@ import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
 })
 export class DashComponent implements OnInit {
 
-  constructor(private snackbarService: ShowSnackBarService, private dialog: MatDialog) { }
+  constructor(private snackbarService: ShowSnackBarService, private dialog: MatDialog, private calenderService: CalenderService) { }
   bigCalendarOptions = {}
   smallCalendarOptions = {}
-  events=[]
+  events = []
 
 
   ngOnInit() {
 
     this.bigCalendarOptions = {
-      events: this.events,
+      events: this.calenderService.initializeEvents(),
       selectable: false,
-      select: (event) => {
-        this.openDialog(false);
-
+      // select: (event) => {
+      //   console.log(event);
+      //   this.openDialog(false);
+      // },
+      eventClick: (mouseEvt) => {
+        // console.log(event)
+        let {slot} = mouseEvt.event.extendedProps;
+        this.openDialog(true, slot);
       },
-      eventClick: (event) => {
-        console.log(event)
-        this.openDialog(true, event);
-
-
+      eventRender: (event) => {
+        console.log("Printing event",event);
       }
     };
   }
 
-  openDialog(showDelete, event?) {
+  openDialog(showDelete, slot) {
+    const dialogRef = this.dialog.open(ScheduleFormComponent, {
+      data: {
+        showDelete,
+        slot
 
-
-    const dialogRef = this.dialog.open(null, {
-      data: showDelete
+      }
     });
 
 
@@ -49,13 +57,13 @@ export class DashComponent implements OnInit {
       else if (result === "CONFIRM") {
         // add slot
         //available
-        this.snackbarService.openSnackBar("Slot added successfully")
+        this.snackbarService.openSnackBar("Slot confirmed successfully")
       }
       else if (result === "DELETE") {
         // delete slot
 
         //available or schedule
-        this.snackbarService.openSnackBar("Slot deleted successfully")
+        this.snackbarService.openSnackBar("Slot cancelled successfully")
 
       }
 
