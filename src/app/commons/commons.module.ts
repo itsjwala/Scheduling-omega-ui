@@ -16,6 +16,7 @@ import { MatSnackBarModule, MatAutocompleteModule, MatFormFieldModule, MatSelect
 import { ShowSnackBarService } from './show-snack-bar.service';
 import { FilterComponent } from './filter/filter.component';
 import { FilterService } from './filter.service';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -33,13 +34,8 @@ import { FilterService } from './filter.service';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
+    MaterialModule,
     FullCalendarModule,
-    MatSnackBarModule,
     AgGridModule.withComponents([]),
   ],
   exports:[

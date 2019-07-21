@@ -23,12 +23,11 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MaterialModule,
     FullCalendarModule,
     RouterModule,
     DialogModule,
-    CommonsModule,
-    MatDialogModule
+    MaterialModule,
+    CommonsModule
   ],
   exports: [
 

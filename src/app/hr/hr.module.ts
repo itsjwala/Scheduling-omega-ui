@@ -27,12 +27,10 @@ import { CommonsModule } from '../commons/commons.module';
     RouterModule,
     ReactiveFormsModule,
     MaterialModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     FullCalendarModule,
     DialogModule,
     CommonsModule,
-    MatDialogModule
+
   ],
   exports: [
 
