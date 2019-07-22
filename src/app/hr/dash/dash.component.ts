@@ -66,7 +66,7 @@ export class DashComponent implements OnInit {
 
       // }
 
-      console.log(result);
+      
 
       console.log("dialog closed", result);
     })

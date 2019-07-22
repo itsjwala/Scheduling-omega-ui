@@ -22,11 +22,11 @@
 
 
  .fc-toolbar h2{
-     font-size: 1rem;
+     font-size: 1.1rem;
 }
 
  .fc h2{
-     height: 1rem;
+     height: 1.1rem;
 }
 
 .fc-toolbar.fc-header-toolbar{
@@ -34,10 +34,12 @@
 }
 
 
-.button-group{
-    font-size: 0.8rem;
+.btn:focus {
+    outline:0 !important;
 }
 
-
+.btn{
+font-size: 0.85rem;
+}
 
 
