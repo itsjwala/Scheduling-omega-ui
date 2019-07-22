@@ -18,8 +18,8 @@ export class HrService {
       {
         slotId: 1,
         slot: {
-          from: '2019-07-24T06:00:00Z',
-          to: '2019-07-24T08:00:00Z'
+          from: '2019-07-24T06:00:00',
+          to: '2019-07-24T08:00:00'
         },
         interviewerId: 1,
         interviewerName: 'jigar wala',

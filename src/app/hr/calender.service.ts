@@ -11,7 +11,22 @@ export class CalenderService {
 
   initializeEvents() {
 
-    // return [
+    let slots = this.hrService.getAvailbleSlots();
+    const tempEvents = [];
+    slots.map(slot => {
+      tempEvents.push({
+        'title': 'Interview',
+        'start': slot.slot.from,
+        'end': slot.slot.to,
+        'slot': slot
+      })
+    });
+    this.events = this.events.concat(tempEvents);
+    // console.log(this.events);
+    return this.events;   
+  }
+
+  // return [
     //   {
     //     "title": "All Day Event",
     //     "start": "2016-01-01"
@@ -35,19 +50,4 @@ export class CalenderService {
     //     "end": "2019-07-21T14:00:00"
     //   }
     // ];
-
-    let slots = this.hrService.getAvailbleSlots();
-    const tempEvents = [];
-    slots.map(slot => {
-      tempEvents.push({
-        'title': 'Interview',
-        'start': slot.slot.from,
-        'end': slot.slot.to,
-        'slot': slot
-      })
-    });
-    this.events = this.events.concat(tempEvents);
-    console.log(this.events);
-    return this.events;   
-  }
 }

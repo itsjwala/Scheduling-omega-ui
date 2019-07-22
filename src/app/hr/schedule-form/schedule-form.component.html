@@ -1,7 +1,7 @@
 <div #content class="form-modal">
     <div class="modal-header">
         <h4 class="modal-title heading" id="modal-basic-title">Schedule Interview</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modalClose()">
+        <button type="button" class="close" aria-label="Close" (click)="modalClose('close')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -19,8 +19,8 @@
             </mat-chip-list>
             <mat-chip-list>
                 <mat-chip class="heading-imp">{{data.slot.interviewerName}}</mat-chip>
-                <mat-chip class="heading-small" *ngIf="techs">{{techs}}</mat-chip>
-                <mat-chip class="heading-small" *ngIf="levels">{{levels}}</mat-chip>
+                <mat-chip class="heading-small" *ngIf="tech">{{tech}}</mat-chip>
+                <mat-chip class="heading-small" *ngIf="level">{{level}}</mat-chip>
             </mat-chip-list>
 
 
@@ -33,7 +33,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" *ngFor="let tech of data.slot.technologies"
-                        (click)="addTech(tech.technology)">{{tech.technology}}</a>
+                        (click)="addTech(tech)">{{tech.technology}}</a>
                 </div>
             </span> &nbsp;
             <span class="dropdown">
@@ -43,7 +43,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" *ngFor="let level of data.slot.levels"
-                        (click)="addLevel(level.level)">{{level.level}}</a>
+                        (click)="addLevel(level)">{{level.level}}</a>
                 </div>
             </span>
 
@@ -78,11 +78,13 @@
             </mat-form-field>
         </form>
 
-        <button type="submit" class="btn btn-dark submit-form" (click)="modal.close('Save click')"
+        <button type="submit" class="btn btn-dark submit-form" (click)="modalClose('submit')"
             [disabled]="!scheduleForm.valid">Submit</button>
     </div>
 </div>
 
-<pre>
+<!-- <pre>
     {{scheduleForm.value | json}}
-</pre>
+     {{scheduleForm.valid}} 
+</pre> -->
+

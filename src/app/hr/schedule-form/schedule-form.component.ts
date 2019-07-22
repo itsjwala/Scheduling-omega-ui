@@ -1,3 +1,5 @@
+import { AppConstants } from './../../AppConstants';
+import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,21 +21,25 @@ export class ScheduleFormComponent implements OnInit {
   @ViewChild('content', { static: false }) private content: ElementRef;
 
   scheduleForm: FormGroup;
-  techs = '';
-  levels = '';
+  tech = '';
+  techId: number;
+  level = '';
+  levelId: number;
   startTime;
   endTime;
   slotDate;
-  candidatesData = [];
+  candidatesData: any = [];
   candidateData = {};
 
   options = [];
   filteredOptions: Observable<string[]>;
 
   constructor(private modalService: NgbModal, private fb: FormBuilder, private hrSvc: HrService,
-    private dialogRef: MatDialogRef<ScheduleFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    private dialogRef: MatDialogRef<ScheduleFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient) {
 
-    console.log(data);
+    // console.log(data);
   }
 
   ngOnInit() {
@@ -42,37 +48,28 @@ export class ScheduleFormComponent implements OnInit {
       candidateID: [''],
       candidateName: ['', Validators.required],
       candidatePh: ['', Validators.required],
-      candidateCV: ['', Validators.required],
+      candidateCV: [''],
       interviewDescr: [''],
       round: ['', Validators.required],
       technology: ['', Validators.required],
+      roundId: [''],
+      technologyId: ['']
     });
 
-    this.candidatesData = [
-      {
-        id: 1,
-        name: 'Anirudh Balakka',
-        phone: '521',
-        CVPath: '/anirudh'
-      },
-      {
-        id: 2,
-        name: 'Jigar Wala',
-        phone: '894',
-        CVPath: '/jigar'
-      }
-    ];
+    this.http.get(AppConstants.getCandidatesInfoURL).subscribe(e => {
+      this.candidatesData = e;
+      // console.log(this.candidatesData);
+      this.candidatesData.map((candidate) => {
+        this.options = [...this.options, candidate.name];
+      });
+      // console.log(this.options);
 
-    this.candidatesData.map((candidate) => {
-      this.options = [...this.options, candidate.name];
-    });
-
-
-    this.filteredOptions = this.scheduleForm.get('candidateName').valueChanges
+      this.filteredOptions = this.scheduleForm.get('candidateName').valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
       );
+    })
   }
 
   private _filter(value: string): string[] {
@@ -82,15 +79,17 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   addTech(tech) {
-    this.techs = tech;
+    this.tech = tech.technology;
+    this.techId = tech.id;
   }
 
   addLevel(level) {
-    this.levels = level;
+    this.level = level.level;
+    this.levelId = level.id;
   }
 
   getCandidateName(event) {
-    console.log(event);
+    // console.log(event);
     this.candidatesData.filter((candidate) => {
       // console.log(this.scheduleForm.value.candidateName);
       const candidateName = this.scheduleForm.value.candidateName;
@@ -99,24 +98,32 @@ export class ScheduleFormComponent implements OnInit {
           {
             'candidateID': candidate.id,
             'candidateName': candidate.name,
-            'candidatePh': candidate.phone,
-            'candidateCV': candidate.CVPath,
+            'candidatePh': candidate.phoneNum,
+            'candidateCV': candidate.fileName,
             'interviewDescr': '',
-            'round': '',
-            'technology': ''
+            'round': this.level,
+            'technology': this.tech,
+            'roundId': this.levelId,
+            'technologyId': this.techId
           });
         console.log("updated..")
       }
     })
   }
 
-  scheduleFormSubmit(event){
+  scheduleFormSubmit(event) {
     event.preventDeafult();
-
   }
 
-  modalClose(){
-    this.dialogRef.close(this.scheduleForm.value);
+  modalClose(event) {
+    if (event === 'close')
+      this.dialogRef.close();
+    if (event === 'submit') {
+      if (this.scheduleForm.valid) {
+        this.dialogRef.close(this.scheduleForm.value);
+      }
+    }
+
   }
 
   // open(event) {
