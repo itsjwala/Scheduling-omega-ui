@@ -27,7 +27,7 @@ import { MaterialModule } from '../material/material.module';
     AboutViewComponent,
     SmallCalendarComponent,
     BigCalendarComponent,
-    FilterComponent
+    FilterComponent,
   ],
   imports: [
     CommonModule,

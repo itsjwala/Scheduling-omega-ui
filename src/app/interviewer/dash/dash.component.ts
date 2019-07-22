@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ComponentRef, Type } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,18 +9,19 @@ import { CalendarService } from '../calendar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AvailableSlotDialogComponent } from '../available-slot-dialog/available-slot-dialog.component';
 import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
+import { BigCalendarComponent } from 'src/app/commons/big-calendar/big-calendar.component';
 
 
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.css']
+  styleUrls: ['./dash.component.css'],
 })
 export class DashComponent implements OnInit {
 
+  @ViewChild(BigCalendarComponent,null) bigCalendar:BigCalendarComponent;
 
-
-  events: any[];
+  events: any[] = [];
 
   bigCalendarOptions: any={};
 
@@ -34,27 +35,46 @@ export class DashComponent implements OnInit {
 
   ngOnInit() {
 
-    this.events = this.calendarService.initializeEvents();
-
     this.bigCalendarOptions = {
-      events:this.events,
       selectable: true,
+      events:(info,cb,errorcb)=>{
+        cb(this.events);
+      },
       select: (event) => {
         this.openDialog(false);
 
       },
       eventClick: (event) => {
-        console.log(event)
-        this.openDialog(true,event);
+        // console.log(event)
+        this.openDialog(true, event);
 
 
       },
+      eventRender: (event) => {
+        // console.log("event", event);
+      }
 
     };
 
+    this.smallCalendarOptions = {
+      datesRender: (info) => {
+        let { activeStart, activeEnd } = info.view;
+        this.calendarService.fetchEvents(activeStart, activeEnd);
 
+      },
+
+    }
 
   }
+
+  ngAfterViewInit(){
+    this.calendarService.eventSubject.subscribe(events => {
+      // console.log(events);
+      this.events = events;
+      this.bigCalendar.fcCalendar.calendar.refetchEvents();
+    })
+  }
+
   openDialog(showDelete, event?){
 
 
@@ -73,39 +93,18 @@ export class DashComponent implements OnInit {
         // add slot
         //available
 
-        this.snackbarServive.openSnackBar("Slot added successfully")
+        this.snackbarServive.openSnackBar("Slot added successfully");
       }
       else if(result === "DELETE"){
         // delete slot
 
         //available or schedule
-        this.snackbarServive.openSnackBar("Slot deleted successfully")
+        this.snackbarServive.openSnackBar("Slot deleted successfully");
 
       }
 
-      console.log("dialog closed",result);
-    })
+
+  });
 
   }
-
-  // open(event) {
-
-  //   let start = event.start;
-  //   let end = event.end;
-  //   let startTime = `${start.getHours()}:${start.getMinutes() ? start.getMinutes() : '00'}`;
-  //   let endTime = `${end.getHours()}:${end.getMinutes() ? end.getMinutes() : '00'}`;
-
-  //   this.slotForm.patchValue({
-  //     slotDate: event.startStr,
-  //     startTime: startTime,
-  //     endTime: endTime
-  //   });
-
-  //   console.log(event);
-
-  //   this.openSnackBar();
-  // }
-
-
-
 }

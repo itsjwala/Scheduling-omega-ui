@@ -13,7 +13,9 @@ import { DialogModule } from 'primeng/dialog';
 import { DashComponent } from './dash/dash.component';
 import { CommonsModule } from '../commons/commons.module';
 import { AvailableSlotDialogComponent } from './available-slot-dialog/available-slot-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+
+import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from '../auth/auth.module';
 
 
 
@@ -27,12 +29,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     DialogModule,
     MaterialModule,
-    CommonsModule
+    CommonsModule,
+    HttpClientModule,
+    AuthModule
   ],
   exports: [
 
   ],
-  entryComponents:[
+  entryComponents: [
     AvailableSlotDialogComponent
   ]
 

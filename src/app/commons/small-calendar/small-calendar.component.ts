@@ -27,6 +27,7 @@ export class SmallCalendarComponent implements OnInit {
 
     this.options = {
       ...this.options,
+      timeZone: 'local',
       defaultDate: new Date(),
       contentHeight: 'auto',
       header: {
@@ -34,7 +35,7 @@ export class SmallCalendarComponent implements OnInit {
         center: '',
         right: 'title'
       },
-      hiddenDays: [0],
+      hiddenDays: [],
       defaultView: 'dayGridMonth',
       allDaySlot: false,
       aspectRatio: 1.09,

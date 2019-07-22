@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginModule } from './login/login.module';
+
 import { InterviewerModule } from './interviewer/interviewer.module';
 import { HrModule } from './hr/hr.module';
 import {CommonsModule} from './commons/commons.module';
@@ -15,7 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HrRoutingModule } from './hr/hr-routing.module';
 import {CommonsRoutingModule} from './commons/commons-routing.module';
 import { InterviewerRoutingModule } from './interviewer/interviewer-routing.module';
-import { LoginRoutingModule } from './login/login-router.module';
+
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { LoginRoutingModule } from './login/login-router.module';
   imports: [
     BrowserModule,
     FormsModule,
-    LoginModule,
+
     HttpClientModule,
     InterviewerModule,
     HrModule,
@@ -34,7 +34,7 @@ import { LoginRoutingModule } from './login/login-router.module';
     BrowserAnimationsModule,
     NgbModule,
     HrRoutingModule,
-    LoginRoutingModule,
+
     CommonsRoutingModule,
     InterviewerRoutingModule,
     AppRoutingModule,

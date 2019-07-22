@@ -7,6 +7,7 @@ import bootstrapPlugin from '@fullcalendar/bootstrap'
 
 import { CalendarInteractionService } from '../calendar-interaction.service';
 import { FullCalendar } from 'primeng/fullcalendar';
+import { View } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-big-calendar',
@@ -15,16 +16,20 @@ import { FullCalendar } from 'primeng/fullcalendar';
 })
 export class BigCalendarComponent implements OnInit {
 
-  @ViewChild("calendar", null) bigCalendar: FullCalendar;
+  @ViewChild("calendar",null) fcCalendar: FullCalendar;
 
   @Input("options")
   options = {}
+
+  // @Input("events")
+  // events = [];
 
   constructor(private calendarIntrService:CalendarInteractionService) { }
 
   ngOnInit() {
     this.options = {
       ...this.options,
+      timeZone: 'local',
       defaultDate: new Date(),
       // height: window.innerHeight * 0.9,
       contentHeight:'auto',
@@ -44,11 +49,11 @@ export class BigCalendarComponent implements OnInit {
         listWeek:'List Week',
         listMonth:'List Month'
       },
-      hiddenDays: [0],
+      hiddenDays: [],
       defaultView: 'timeGridWeek',
       allDaySlot: false,
-      maxTime: "21:00:00",
-      minTime: "09:00:00",
+      maxTime: "08:00:00",
+      minTime: "22:00:00",
       slotDuration: "00:30:00",
       slotLabelInterval: "00:30:00",
       slotLabelFormat: {
@@ -59,11 +64,28 @@ export class BigCalendarComponent implements OnInit {
       plugins: [interactionPlugin,bootstrapPlugin,dayGridPlugin, timeGridPlugin, listPlugin ],
     };
 
-    this.calendarIntrService.smallToBigCalendarStream.subscribe(date=>{
-      this.bigCalendar.getCalendar().gotoDate(date);
-    })
-
 
   }
+  ngAfterViewInit(){
+
+    this.calendarIntrService.smallToBigCalendarStream.subscribe(date=>{
+      this.fcCalendar.getCalendar().gotoDate(date);
+    })
+
+  }
+
+  // ngDoCheck(){
+
+  //   if(this.fcCalendar.calendar){
+  //     console.log(this.fcCalendar.calendar.getEventSources())
+
+  //     // this.fcCalendar.calendar.getEventSources()[0].refetch()
+  //     // this.fcCalendar.calendar.refetchEvents()
+
+  //   }
+  //   console.log("do check");
+  // }
+
+
 
 }

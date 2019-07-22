@@ -1,38 +1,85 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AppConstants } from '../AppConstants'
+import * as moment from 'moment';
+import { AuthService } from '../auth/auth.service';
+import { Subject } from 'rxjs';
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarService {
 
+  events = []
+
+  hashDateRanges = {}
+
+  eventSubject: Subject<any> = new Subject();
+
+  constructor(private _http: HttpClient, private authService: AuthService) { }
+
+  fetchEvents(curStart, curEnd) {
+    // console.log(curStart.toISOString())
+    // console.log(curEnd.toISOString())
+    let key = curStart.toISOString() + curEnd.toISOString();
+    if (!this.hashDateRanges[key]) {
+      let begin = moment(curStart).isoWeekday(1).subtract(1, 'day');
+      let end = moment(curEnd).isoWeekday(7);
+      // console.log(begin.toISOString())
+      // console.log("************")
 
 
-  constructor() { }
+      // console.log(begin.format())
+      // console.log(end)
+      // console.log(end.toISOString())
+      this.hashDateRanges[key] = true;
 
-  initializeEvents() {
-    return [
-      {
-        "title": "All Day Event",
-        "start": "2016-01-01"
-      },
-      {
-        "title": "Long Event",
-        "start": "2016-01-07",
-        "end": "2016-01-10"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2016-01-09T16:00:00"
-      },
-      {
-        "title": "Repeating Event",
-        "start": "2019-07-17T16:00:00"
-      },
-      {
-        "title": "Conference",
-        "start": "2019-07-17T12:00:00",
-        "end": "2019-07-17T14:00:00"
-      }
-    ];
+
+      let from = begin.format();
+      let to = end.format();
+
+      console.log(from)
+      console.log(to)
+
+
+      let url = `${AppConstants.baseURL}/interviewers/${this.authService.getEmployeeId()}/slots?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+      // let url = `http://127.0.0.1:8887/interviewer_with_id_available_slot.json`;
+      console.log(url)
+      // url = encodeURIComponent(url);
+    //  console.log(url)
+      this._http.get(url).subscribe((response: any) => {
+
+        // console.log(response);
+        let tempevts = [];
+        response.forEach(obj => {
+
+          // console.log(obj)
+          let evt = {
+            start: obj.slot.from,
+            end: obj.slot.to,
+            availableSlot: obj
+          }
+          // this.events.push(evt);
+          tempevts.push(evt);
+
+        })
+
+        this.events = this.events.concat(tempevts);
+
+        this.eventSubject.next(this.events);
+        console.log(this.events);
+      })
+
+
+    }
+
+
+
+
+    return null;
   }
+
 }
