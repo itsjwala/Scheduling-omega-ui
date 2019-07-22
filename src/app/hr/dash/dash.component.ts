@@ -20,9 +20,9 @@ export class DashComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.events  = this.calenderService.initializeEvents()
     this.bigCalendarOptions = {
-      events: this.calenderService.initializeEvents(),
+      events : this.calenderService.initializeEvents(),
       selectable: false,
       // select: (event) => {
       //   console.log(event);
@@ -44,28 +44,29 @@ export class DashComponent implements OnInit {
       data: {
         showDelete,
         slot
-
       }
     });
 
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result === undefined || result === "CANCEL") {
-        //do nothing
-      }
-      else if (result === "CONFIRM") {
-        // add slot
-        //available
-        this.snackbarService.openSnackBar("Slot confirmed successfully")
-      }
-      else if (result === "DELETE") {
-        // delete slot
+      // if (result === undefined || result === "CANCEL") {
+      //   //do nothing
+      // }
+      // else if (result === "CONFIRM") {
+      //   // add slot
+      //   //available
+      //   this.snackbarService.openSnackBar("Slot confirmed successfully")
+      // }
+      // else if (result === "DELETE") {
+      //   // delete slot
 
-        //available or schedule
-        this.snackbarService.openSnackBar("Slot cancelled successfully")
+      //   //available or schedule
+      //   this.snackbarService.openSnackBar("Slot cancelled successfully")
 
-      }
+      // }
+
+      console.log(result);
 
       console.log("dialog closed", result);
     })

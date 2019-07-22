@@ -18,8 +18,8 @@ export class HrService {
       {
         slotId: 1,
         slot: {
-          from: '2019-07-23T05:00:00',
-          to: '2019-07-23T08:00:00'
+          from: '2019-07-24T06:00:00Z',
+          to: '2019-07-24T08:00:00Z'
         },
         interviewerId: 1,
         interviewerName: 'jigar wala',
@@ -53,7 +53,7 @@ export class HrService {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek'
       },
-      hiddenDays: [0],
+      hiddenDays: [],
       defaultView: 'timeGridWeek',
       allDaySlot: false,
       maxTime: "21:00:00",

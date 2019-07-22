@@ -17,6 +17,7 @@ export class BigCalendarComponent implements OnInit {
 
   @ViewChild("calendar", null) bigCalendar: FullCalendar;
 
+  @Input("events") events = [];
   @Input("options")
   options = {}
 
@@ -44,7 +45,7 @@ export class BigCalendarComponent implements OnInit {
         listWeek:'List Week',
         listMonth:'List Month'
       },
-      hiddenDays: [0],
+      hiddenDays: [],
       defaultView: 'timeGridWeek',
       allDaySlot: false,
       maxTime: "21:00:00",
