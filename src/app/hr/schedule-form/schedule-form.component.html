@@ -1,56 +1,90 @@
-<div #content>
-<div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Schedule Interview</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+<div #content class="form-modal">
+    <div class="modal-header">
+        <h4 class="modal-title heading" id="modal-basic-title">Schedule Interview</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalClose('close')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <h4>
+        <!-- <h4>
             <span class="badge badge-info">{{slotDate}}</span> &nbsp;
             <span class="badge badge-info">{{startTime}}</span> &nbsp;
             <span class="badge badge-info">{{endTime}}</span>
-        </h4>
-
+        </h4> -->
         <form [formGroup]="scheduleForm">
+            <mat-chip-list class="side-info">
+                <mat-chip class="heading-small">{{data.slot.slot.to.split('T')[0]}}</mat-chip>&nbsp;
+                <mat-chip class="heading-small">{{data.slot.slot.from.split('T')[1]}}</mat-chip>&nbsp;
+                <mat-chip class="heading-small">{{data.slot.slot.to.split('T')[1]}}</mat-chip>
+            </mat-chip-list>
+            <mat-chip-list>
+                <mat-chip class="heading-imp">{{data.slot.interviewerName}}</mat-chip>
+                <mat-chip class="heading-small" *ngIf="tech">{{tech}}</mat-chip>
+                <mat-chip class="heading-small" *ngIf="level">{{level}}</mat-chip>
+            </mat-chip-list>
 
-            <mat-form-field class="example-full-width" style="width: 48%">
-                <input matInput placeholder="Candidate Name" formControlName="candidateName">
-            </mat-form-field>
-
-            &nbsp;
-
-            <mat-form-field class="example-full-width" style="width: 48%">
-                <input matInput placeholder="Candidate Phone no." formControlName="candidatePh">
-            </mat-form-field>
-
-            &nbsp;
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Candidate CV" formControlName="candidateCV">
-            </mat-form-field>
 
             <hr>
 
-            <mat-form-field class="example-full-width" style="width: 48%">
-                <input matInput placeholder="Round" formControlName="round">
-            </mat-form-field>
-
-            &nbsp;
-
-            <mat-form-field class="example-full-width" style="width: 48%">
-                <input matInput placeholder="Technology" formControlName="technology">
-            </mat-form-field>
+            <span class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Tech
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" *ngFor="let tech of data.slot.technologies"
+                        (click)="addTech(tech)">{{tech.technology}}</a>
+                </div>
+            </span> &nbsp;
+            <span class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Level
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" *ngFor="let level of data.slot.levels"
+                        (click)="addLevel(level)">{{level.level}}</a>
+                </div>
+            </span>
 
             <hr>
+            <div>
+                <mat-form-field class="example-full-width" style="width: 48%">
+                    <input matInput placeholder="Candidate Name" formControlName="candidateName"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getCandidateName($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                &nbsp;
+
+                <mat-form-field class="example-full-width" style="width: 30%">
+                    <input matInput type="number" placeholder="Phone" formControlName="candidatePh">
+                </mat-form-field>
+            </div>
+            &nbsp;
+            <!-- <mat-form-field class="example-full-width" style="width: 30%"> 
+                 <input matInput placeholder="CV" formControlName="candidateCV" readonly> &nbsp;-->
+            <input placeholder="CV" formControlName="candidateCV" readonly> &nbsp;
+            <!-- </mat-form-field> -->
+            <button type="button" class="btn btn-primary" (click)=scheduleFormSubmit($event)>Upload</button>
 
             <mat-form-field class="example-full-width" style="width: 100%">
-                <input matInput placeholder="Description" formControlName="interviewDescr">
+                <textarea matInput placeholder="Description" formControlName="interviewDescr">
+                    </textarea>
             </mat-form-field>
-
         </form>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')"
+
+        <button type="submit" class="btn btn-dark submit-form" (click)="modalClose('submit')"
             [disabled]="!scheduleForm.valid">Submit</button>
     </div>
 </div>
+
+<!-- <pre>
+    {{scheduleForm.value | json}}
+     {{scheduleForm.valid}} 
+</pre> -->
+

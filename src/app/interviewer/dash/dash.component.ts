@@ -61,9 +61,11 @@ export class DashComponent implements OnInit {
         let { activeStart, activeEnd } = info.view;
         this.calendarService.fetchEvents(activeStart, activeEnd);
 
-      },
+      }
 
-    }
+    };
+
+
 
   }
 
