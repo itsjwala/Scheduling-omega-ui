@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 export class CalendarInteractionService {
 
   smallToBigCalendarStream:Subject<any> = new Subject();
+  // bigToSmallCalendarStream:Subject<any> = new Subject();
 
   constructor() { }
 

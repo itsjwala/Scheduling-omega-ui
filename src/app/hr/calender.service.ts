@@ -11,7 +11,35 @@ export class CalenderService {
 
   initializeEvents() {
 
-    let slots = this.hrService.getAvailbleSlots();
+    let slots = [
+      {
+        slotId: 1,
+        slot: {
+          from: '2019-07-24T10:00:00',
+          to: '2019-07-24T12:00:00'
+        },
+        interviewerId: 1,
+        interviewerName: 'jigar wala',
+        levels: [
+          {
+            id: 1,
+            level: 'R1'
+          }
+        ],
+        technologies: [
+          {
+            id: 1,
+            technology: 'Angular'
+          },
+          {
+            id: 2,
+            technology: 'Java'
+          }
+        ],
+        scheduled: false
+      }];
+
+
     const tempEvents = [];
     slots.map(slot => {
       tempEvents.push({
@@ -23,7 +51,7 @@ export class CalenderService {
     });
     this.events = this.events.concat(tempEvents);
     // console.log(this.events);
-    return this.events;   
+    return this.events;
   }
 
   // return [

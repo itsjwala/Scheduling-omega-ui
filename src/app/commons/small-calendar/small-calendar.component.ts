@@ -60,5 +60,13 @@ export class SmallCalendarComponent implements OnInit {
       }
     };
   }
+  // ngAfterViewInit() {
+
+  //   this.calendarIntrService.bigToSmallCalendarStream.subscribe(date => {
+  //     console.log("changing cmall")
+  //     this.smallCalendar.getCalendar().gotoDate(date);
+  //   })
+
+  // }
 
 }

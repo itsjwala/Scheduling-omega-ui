@@ -1,0 +1,26 @@
+.heading-small {
+    font-size: 0.65rem;
+    margin-bottom: 0rem;
+    color: #7386D5;
+}
+
+.widthHeightFull{
+    width: 90%;
+    height: 50%;
+}
+
+p{
+    font-size: 0.8rem;
+    margin: 0.7rem 0 0 0.3rem;
+
+}
+
+.mybutton-grp{
+    /* position: relative;
+    top:5rem; */
+    margin-top: 1rem;
+}
+
+.example-full-width {
+  width: 100%;
+}
