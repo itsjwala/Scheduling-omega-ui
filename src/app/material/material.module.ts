@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatDatepickerModule, MatNativeDateModule, MatAutocomplete, MatAutocompleteModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule, MatSnackBarModule
+  MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatDatepickerModule, MatNativeDateModule, MatAutocomplete, MatAutocompleteModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule, MatSnackBarModule, MatChip, MatChipsModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -24,8 +24,8 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    MatChipsModule
   ],
   exports: [
     MatToolbarModule,
@@ -43,7 +43,8 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ],
 })
 

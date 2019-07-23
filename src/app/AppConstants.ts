@@ -1,15 +1,20 @@
 export class AppConstants{
 
     // public static get baseURL(): string { return "http://localhost:8080/api"; }
-    public static get baseURL(): string { return "http://85519a1d.ngrok.io/api"; }
+    public static get baseURL(): string { return "http://39d46c7a.ngrok.io/api"; }
     // public static get baseURL(): string { return 'http://localhost:8080/api'; }
 
-    public static get addScheduledSlotURL(): string { return 'http://85519a1d.ngrok.io/api/hrs/5/schedules';}
+    public static get addScheduledSlotURL(): string { return this.baseURL+'/hrs/5/schedules';}
 
-    public static get getCandidatesInfoURL(): string { return 'http://85519a1d.ngrok.io/api/candidates';}
+    public static get getCandidatesInfoURL(): string { return this.baseURL+'/candidates';}
 
-    public static get getLevelsURL(): string { return 'http://85519a1d.ngrok.io/api/levels'}
+    public static get getTechsURL(): string { return this.baseURL + '/technology';}
 
-    public static  getAvailableEvents(from, to): string { return `http://85519a1d.ngrok.io/api/interviewers/slots?from=${from}&to=${to}`}
+    public static get getLevelsURL(): string { return this.baseURL + '/levels';}
 
+    public static  getAvailableEvents(from, to): string { return this.baseURL+`/interviewers/slots?from=${from}&to=${to}`}
+
+    public static get addEmployee(): string { return this.baseURL+ '/employees';}
+
+    public static get addInterviewer(): string { return this.baseURL+ '/employees/interviewers';}
 }

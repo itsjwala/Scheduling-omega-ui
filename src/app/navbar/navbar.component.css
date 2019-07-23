@@ -1,9 +1,13 @@
+.navbar{
+    float: center;
+}
+
 .li {
     font-size: 13px;
     margin: 0rem;
     opacity: 0.4;
     color: black;
-    background-color: cornsilk;
+    background-color: rgb(120, 212, 248);
 }
 
 .heading :hover{

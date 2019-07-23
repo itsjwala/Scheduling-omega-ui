@@ -1,0 +1,65 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="../../../assets/img-01.png" alt="IMG" class="animated bounce delay-3s infinite">
+            </div>
+
+            <form class="login100-form validate-form" [formGroup]="preferencesForm" (submit)="registerUser($event)">
+                <span class="login100-form-title">
+                    Interviewer Register
+                </span>
+
+                <mat-chip-list>
+                    <mat-chip class="heading-imp" *ngFor="let tech of techs">{{tech.technology}}</mat-chip>
+                    <mat-chip class="heading-imp" *ngFor="let level of levels">{{level.level}}</mat-chip>
+                </mat-chip-list> <br>
+
+                <div class="wrap-input100 validate-input">
+                    <input matInput class="input100" type="text" formControlName="technology"
+                        [matAutocomplete]="autoTech" placeholder="technology">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                    </span>
+                    <mat-autocomplete #autoTech="matAutocomplete" (optionSelected)='getTech($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredOptionsTech" [value]="option.technology">
+                            {{option.technology}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div *ngIf="preferencesForm.get('technology').invalid && (preferencesForm.get('technology').dirty || preferencesForm.get('technology').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="preferencesForm.get('technology').errors.required">
+                        technology must be specified
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+                    <input matInput class="input100" type="text" formControlName="levels" [matAutocomplete]="auto"
+                        placeholder="level">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                    </span>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getLevel($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredOptionsLevel" [value]="option.level">
+                            {{option.level}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div *ngIf="preferencesForm.get('levels').invalid && (preferencesForm.get('levels').dirty || preferencesForm.get('levels').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="preferencesForm.get('levels').errors.required">
+                        level must be specified
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" 
+                        (click)="preferencesFormSubmit($event)">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

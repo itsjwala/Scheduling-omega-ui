@@ -52,8 +52,8 @@ export class BigCalendarComponent implements OnInit {
       hiddenDays: [],
       defaultView: 'timeGridWeek',
       allDaySlot: false,
-      maxTime: "08:00:00",
-      minTime: "22:00:00",
+      // maxTime: "08:00:00",
+      // minTime: "22:00:00",
       slotDuration: "00:30:00",
       slotLabelInterval: "00:30:00",
       slotLabelFormat: {

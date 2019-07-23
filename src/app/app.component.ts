@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 import { UrlTree, UrlSerializer, DefaultUrlSerializer } from '@angular/router';
 
@@ -28,5 +29,14 @@ import { UrlTree, UrlSerializer, DefaultUrlSerializer } from '@angular/router';
 })
 export class AppComponent {
   title = 'Smart Interview Processing';
+  loggedIn = false;
 
+  constructor(private authService: AuthService){}
+
+  ngOnInit(){
+    this.authService.getAuthStream()
+    .subscribe((e: any) => {
+      this.loggedIn = e;
+    })
+  }
 }

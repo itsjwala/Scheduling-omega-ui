@@ -27,7 +27,8 @@
             <hr>
 
             <span class="dropdown">
-                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                <button class="btn  dropdown-toggle" type="button" 
+                id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Tech
                 </button>
@@ -37,7 +38,8 @@
                 </div>
             </span> &nbsp;
             <span class="dropdown">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                <button class="btn dropdown-toggle" type="button" 
+                id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Level
                 </button>
@@ -52,7 +54,8 @@
                 <mat-form-field class="example-full-width" style="width: 48%">
                     <input matInput placeholder="Candidate Name" formControlName="candidateName"
                         [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getCandidateName($event.option.value)'>
+                    <mat-autocomplete #auto="matAutocomplete" 
+                    (optionSelected)='getCandidateName($event.option.value)'>
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                             {{option}}
                         </mat-option>
@@ -70,7 +73,8 @@
                  <input matInput placeholder="CV" formControlName="candidateCV" readonly> &nbsp;-->
             <input placeholder="CV" formControlName="candidateCV" readonly> &nbsp;
             <!-- </mat-form-field> -->
-            <button type="button" class="btn btn-primary" (click)=scheduleFormSubmit($event)>Upload</button>
+            <button type="button" class="btn btn-primary"
+             (click)=scheduleFormSubmit($event)>Upload</button>
 
             <mat-form-field class="example-full-width" style="width: 100%">
                 <textarea matInput placeholder="Description" formControlName="interviewDescr">
@@ -87,4 +91,3 @@
     {{scheduleForm.value | json}}
      {{scheduleForm.valid}} 
 </pre> -->
-
