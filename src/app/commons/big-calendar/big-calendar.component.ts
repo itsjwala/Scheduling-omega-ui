@@ -63,6 +63,8 @@ export class BigCalendarComponent implements OnInit {
       allDaySlot: false,
       maxTime: "14:00:00",
       minTime: "04:00:00",
+      // maxTime: "08:00:00",
+      // minTime: "22:00:00",
       slotDuration: "00:30:00",
       slotLabelInterval: "00:30:00",
       slotLabelFormat: {

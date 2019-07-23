@@ -1,3 +1,5 @@
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { AuthModule } from './auth/auth.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,11 +32,12 @@ import { InterviewerRoutingModule } from './interviewer/interviewer-routing.modu
     HttpClientModule,
     InterviewerModule,
     HrModule,
+    AuthModule,
     CommonsModule,
     BrowserAnimationsModule,
     NgbModule,
     HrRoutingModule,
-
+    AuthRoutingModule,
     CommonsRoutingModule,
     InterviewerRoutingModule,
     AppRoutingModule,
