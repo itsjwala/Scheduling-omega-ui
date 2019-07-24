@@ -11,12 +11,16 @@ import { PreviousScheduleComponent } from './previous-schedule/previous-schedule
 import { SmallCalendarComponent } from './small-calendar/small-calendar.component';
 import { BigCalendarComponent } from './big-calendar/big-calendar.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { CalendarInteractionService } from './calendar-interaction.service';
 import { MatSnackBarModule, MatAutocompleteModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatFormFieldControl, MatInputModule } from '@angular/material';
 import { ShowSnackBarService } from './show-snack-bar.service';
 import { FilterComponent } from './filter/filter.component';
 import { FilterService } from './filter.service';
 import { MaterialModule } from '../material/material.module';
+import { ReportsComponent } from './reports/reports.component';
+import { InterviewerReportComponent } from './interviewer-report/interviewer-report.component';
+import { HrReportComponent } from './hr-report/hr-report.component';
 
 
 
@@ -28,6 +32,9 @@ import { MaterialModule } from '../material/material.module';
     SmallCalendarComponent,
     BigCalendarComponent,
     FilterComponent,
+    ReportsComponent,
+    InterviewerReportComponent,
+    HrReportComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +43,7 @@ import { MaterialModule } from '../material/material.module';
     ReactiveFormsModule,
     MaterialModule,
     FullCalendarModule,
+    NgxSpinnerModule,
     AgGridModule.withComponents([]),
   ],
   exports:[
