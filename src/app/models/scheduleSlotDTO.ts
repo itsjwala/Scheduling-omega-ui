@@ -1,4 +1,4 @@
-import Candidate from '../../candidate/candidate';
+import Candidate from './candidate';
 
 export default class ScheduleSlotDTO {
 
@@ -7,7 +7,7 @@ export default class ScheduleSlotDTO {
     private hrId: number;
     private interviewDescription: string;
     private candidate: Candidate;
-    private technology: number;
+    private technologyId: number;
     private levelId: number;
 
     constructor() { }
@@ -32,8 +32,8 @@ export default class ScheduleSlotDTO {
         this.candidate = candidate;
     }
 
-    set setTechnology(tech: number){
-        this.technology = tech;
+    set setTechnologyId(tech: number){
+        this.technologyId = tech;
     }
 
     set setLevelId(levelId: number){

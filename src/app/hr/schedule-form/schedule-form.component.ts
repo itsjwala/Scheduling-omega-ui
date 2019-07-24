@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 
 import { HrService } from '../hr.service';
@@ -27,10 +27,12 @@ export class ScheduleFormComponent implements OnInit {
   levelId: number;
   startTime;
   endTime;
-  slotDate;
+  viewDate;
   viewSlot;
   candidatesData: any = [];
   candidateData = {};
+
+  cancellationReason;
 
   options = [];
   filteredOptions: Observable<string[]>;
@@ -39,15 +41,25 @@ export class ScheduleFormComponent implements OnInit {
     private dialogRef: MatDialogRef<ScheduleFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient) {
+    if (!data.isAvailable) {
+      this.level = data.slot.level;
+      this.tech = data.slot.technology;
+    }
+    console.log(data);
 
-    // console.log(data);
   }
 
   ngOnInit() {
-    // console.log("dsfsdfdsfd")
-    this.viewSlot = this.data.slot.slot;
-    this.viewSlot.from = new Date(this.viewSlot.from)
-    this.viewSlot.to = new Date(this.viewSlot.to)
+
+    let start = new Date(this.data.slot.slot.from);
+    this.viewDate = start;
+    this.startTime = `${start.getHours() % 12 || 12}:${start.getMinutes() == 0 ? "00" : start.getMinutes()} ${start.getHours() < 12 ? "AM" : "PM"}`;
+
+    let end = new Date(this.data.slot.slot.to);
+
+    this.endTime = `${end.getHours() % 12 || 12}:${end.getMinutes() == 0 ? "00" : end.getMinutes()} ${start.getHours() < 12 ? "AM" : "PM"}`;
+
+
     this.scheduleForm = this.fb.group({
       candidateID: [''],
       candidateName: ['', Validators.required],
@@ -59,21 +71,37 @@ export class ScheduleFormComponent implements OnInit {
       roundId: [''],
       technologyId: ['']
     });
+    if (this.data.isAvailable) {
+      this.http.get(AppConstants.getCandidatesInfoURL).subscribe(e => {
+        this.candidatesData = e;
+        // console.log(this.candidatesData);
+        this.candidatesData.map((candidate) => {
+          this.options = [...this.options, candidate.name];
+        });
+        // console.log(this.options);
 
-    this.http.get(AppConstants.getCandidatesInfoURL).subscribe(e => {
-      this.candidatesData = e;
-      // console.log(this.candidatesData);
-      this.candidatesData.map((candidate) => {
-        this.options = [...this.options, candidate.name];
-      });
-      // console.log(this.options);
+
+      })
 
       this.filteredOptions = this.scheduleForm.get('candidateName').valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-    })
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+    }
+    else{
+      this.scheduleForm.patchValue({
+        'candidateID': this.data.slot.candidate.id,
+        'candidateName': this.data.slot.candidate.name,
+        'candidatePh': this.data.slot.candidate.phoneNum,
+        'candidateCV': this.data.slot.candidate.fileName,
+        'interviewDescr': this.data.slot.interviewDescription
+      })
+    }
+
+
+    this.cancellationReason = new FormControl("", [Validators.required]);
+
   }
 
   private _filter(value: string): string[] {
@@ -85,11 +113,19 @@ export class ScheduleFormComponent implements OnInit {
   addTech(tech) {
     this.tech = tech.technology;
     this.techId = tech.id;
+    this.scheduleForm.patchValue({
+      technology: tech.technology,
+      technologyId: tech.id
+    });
   }
 
   addLevel(level) {
     this.level = level.level;
     this.levelId = level.id;
+    this.scheduleForm.patchValue({
+      round: level.level,
+      roundId: level.id
+    });
   }
 
   getCandidateName(event) {
@@ -98,35 +134,35 @@ export class ScheduleFormComponent implements OnInit {
       // console.log(this.scheduleForm.value.candidateName);
       const candidateName = this.scheduleForm.value.candidateName;
       if (candidateName === candidate.name) {
-        this.scheduleForm.setValue(
+        this.scheduleForm.patchValue(
           {
             'candidateID': candidate.id,
             'candidateName': candidate.name,
             'candidatePh': candidate.phoneNum,
             'candidateCV': candidate.fileName,
-            'interviewDescr': '',
-            'round': this.level,
-            'technology': this.tech,
-            'roundId': this.levelId,
-            'technologyId': this.techId
+            // 'interviewDescr': '',
+            // 'round': this.level,
+            // 'technology': this.tech,
+            // 'roundId': this.levelId,
+            // 'technologyId': this.techId
           });
         console.log("updated..")
       }
     })
   }
 
-  scheduleFormSubmit(event) {
-    event.preventDeafult();
-  }
-
   modalClose(event) {
     if (event === 'close')
       this.dialogRef.close();
-    if (event === 'submit') {
+    else if (event === 'submit') {
       if (this.scheduleForm.valid) {
-        this.dialogRef.close(this.scheduleForm.value);
+        this.dialogRef.close({ ...this.scheduleForm.value, interviewerId: this.data.slot.interviewerId, slotId: this.data.slot.slotId});
       }
     }
+    else if (event === "delete"){
+      this.dialogRef.close(this.cancellationReason.value);
+    }
+
 
   }
 

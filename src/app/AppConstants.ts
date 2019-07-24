@@ -1,10 +1,20 @@
+import { AuthService } from './auth/auth.service';
+
 export class AppConstants{
 
+
+    constructor(){}
+
+
     // public static get baseURL(): string { return "http://localhost:8080/api"; }
-    public static get baseURL(): string { return "http://34b2c1dd.ngrok.io"; }
+    public static get baseURL(): string { return "http://34b2c1dd.ngrok.io/api"; }
     // public static get baseURL(): string { return 'http://localhost:8080/api'; }
 
-    public static get addScheduledSlotURL(): string { return this.baseURL+'/hrs/5/schedules';}
+    public static addScheduledSlotURL(a): string {
+
+        return this.baseURL + `/hrs/${a}/schedules`;
+
+    }
 
     public static get getCandidatesInfoURL(): string { return this.baseURL+'/candidates';}
 
@@ -18,9 +28,9 @@ export class AppConstants{
 
     public static get addInterviewer(): string { return this.baseURL+ '/employees/interviewers';}
 
-    public static  getHRReport(from, to): string {  return this.baseURL+`/api/reports/hrs?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
+    public static  getHRReport(from, to): string {  return this.baseURL+`/reports/hrs?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 
-    public static  getInteviewerReport(from, to): string { return this.baseURL+`/api/reports/interviewers?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
+    public static  getInteviewerReport(from, to): string { return this.baseURL+`/reports/interviewers?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 
-    public static  getInteviewerReportNoSlotGiven(from, to): string { return this.baseURL+`/api/reports/interviewers/no-slots?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
+    public static  getInteviewerReportNoSlotGiven(from, to): string { return this.baseURL+`/reports/interviewers/no-slots?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 }

@@ -1,4 +1,4 @@
-import { Roles } from './../../Employee/Role';
+import { Roles } from '../../models/Role';
 import { AuthService } from './../auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -24,19 +24,21 @@ export class LoginComponent implements OnInit {
       name: ['', Validators.required],
       wissenId: ['', Validators.required],
       phoneNum: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', Validators.required],
       role: ['', Validators.required]
     });
 
-    this.authService.getAuthStream()
-      .subscribe((e: any) => {
-        this.token = e.token;
-        // localStorage.setItem('id_token', this.token);
-        // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
-      });
+    this.token = this.authService.getToken();
+
+
+    // this.authService.getAuthStream()
+    //   .subscribe((e: any) => {
+    //     // localStorage.setItem('id_token', this.token);
+    //     // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    //   });
   }
 
-    
+
 
     // console.log(this.registerForm.get('password').errors);
 

@@ -67,9 +67,9 @@ export class CalendarService {
       // console.log(to)
 
 
-      // let url = `${AppConstants.baseURL}/interviewers/${this.authService.getEmployeeId()}/slots?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
-      let url = `http://127.0.0.1:8887/interviewer_with_id_available_slot.json`;
-      let url2 = `http://127.0.0.1:8887/interviewer_see_allSchedule_interveiws.json`;
+      let url = `${AppConstants.baseURL}/interviewers/${this.authService.getEmployeeId()}/slots?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+      // let url = `http://127.0.0.1:8887/interviewer_with_id_available_slot.json`;
+      // let url2 = `http://127.0.0.1:8887/interviewer_see_allSchedule_interveiws.json`;
       // console.log(url)
       // url = encodeURIComponent(url);
       //  console.log(url)
@@ -91,7 +91,7 @@ export class CalendarService {
         this.eventSubject.next(this.events);
         // console.log(this.events);
       })
-      // let url2 = `${AppConstants.baseURL}/interviewers/${this.authService.getEmployeeId()}/schedules?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+      let url2 = `${AppConstants.baseURL}/interviewers/${this.authService.getEmployeeId()}/schedules?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
       this._http.get(url2).subscribe((response: any) => {
 
         // console.log(response);

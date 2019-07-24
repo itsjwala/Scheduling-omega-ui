@@ -2,9 +2,9 @@ import { Subject } from 'rxjs';
 import { AppConstants } from './../AppConstants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import Employee from '../Employee/Employee';
+import Employee from '../models/Employee';
 import * as moment from "moment";
-import  Interviewer  from '../InterviewerDTO/interviewer';
+import  Interviewer  from '../models/interviewer';
 
 
 @Injectable({
@@ -13,9 +13,12 @@ import  Interviewer  from '../InterviewerDTO/interviewer';
 export class AuthService {
   //role and auth code here
   token: string;
+
+  id :number;
+  role:string;
   employee: Employee;
   interviewer: Interviewer;
-  authStream = new Subject();
+  // authStream = new Subject();
   constructor(private http: HttpClient) { }
 
 
@@ -24,23 +27,15 @@ export class AuthService {
   }
 
   getEmployeeId() {
-    return 1;
+    // return 1;
+    return this.id;
   }
 
-  getAuthStream() {
-    return this.authStream;
+  getRole(){
+    return this.role;
   }
 
-  addEmployee(registerForm) {
-    let { name, email, wissenId, phoneNum } = registerForm.value;
-    this.employee = new Employee(email, name, wissenId, phoneNum);
-    console.log(this.employee);
 
-    this.http.post(AppConstants.addEmployee, this.employee)
-      .subscribe(e => {
-        this.authStream.next(e);
-      });
-  }
 
   addInterviewer(preference){
     console.log(this.employee);
@@ -50,28 +45,45 @@ export class AuthService {
     this.interviewer.setTechnology = preference.technologies;
 
     console.log(this.interviewer);
-    return this.http.post(AppConstants.addInterviewer, this.interviewer)
-      .subscribe(res => this.setSession)
+    this.http.post(AppConstants.addInterviewer, this.interviewer)
+      .subscribe(res => this.setSession(res))
   }
 
   login(registerForm) {
-    let { name, email, wissenId, phoneNum } = registerForm.value;
-    this.employee = new Employee(email, name, wissenId, phoneNum);
+    let { name, email, wissenId, phoneNum, role, password } = registerForm.value;
+    this.employee = new Employee(email, name, wissenId, phoneNum, role.toUpperCase());
     console.log(this.employee);
-    return this.http.post(AppConstants.addEmployee, this.employee)
-      .subscribe(res => this.setSession)
+    this.http.post(AppConstants.addEmployee, { ...this.employee, password: password})
+      .subscribe(res => this.setSession(res))
   }
 
   private setSession(authResult) {
-    const expiresAt = moment().add(authResult.expiresIn, 'second');
 
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+    let claim = this.decodeJwt(authResult.token);
+    console.log(claim);
+    this.id = claim.id;
+    this.role = claim.role;
+
+    const expiresAt = moment().add(claim.exp, 'milliseconds');
+
+    localStorage.setItem('id', ""+this.id);
+    localStorage.setItem("exp", ""+expiresAt.valueOf());
+  }
+
+  private decodeJwt(token){
+    console.log(token)
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
   }
 
   logout() {
-    localStorage.removeItem("jwttoken");
-    localStorage.removeItem("expires_at");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("exp");
   }
 
   public isLoggedIn() {
@@ -83,7 +95,7 @@ export class AuthService {
   }
 
   getExpiration() {
-    const expiration = localStorage.getItem("expires_at");
+    const expiration = localStorage.getItem("exp");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }

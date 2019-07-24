@@ -4,14 +4,21 @@ export default class Employee {
     private name: string;
     private wissenId: string;
     private phoneNumber: string;
+    private role : string;
 
-    constructor(email,name,wissenId,phoneNumber){
+
+
+    constructor(email,name,wissenId,phoneNumber,role){
         this.email = email;
         this.name = name;
         this.wissenId = wissenId;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
+    get getRole() : string{
+        return this.role;
+    }
     get getEmail(): string {
         return this.email;
     }
@@ -42,5 +49,8 @@ export default class Employee {
 
     set setPhoneNum(num: string) {
         this.phoneNumber = num;
+    }
+    set setRole(role:string) {
+        this.role =role;
     }
 }

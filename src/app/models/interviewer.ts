@@ -1,4 +1,4 @@
-import Employee from '../Employee/Employee';
+import Employee from './Employee';
 
 export default class Interviewer{
     private emp: Employee;
