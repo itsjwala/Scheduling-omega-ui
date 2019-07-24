@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("jwttoken");
     localStorage.removeItem("expires_at");
   }
 

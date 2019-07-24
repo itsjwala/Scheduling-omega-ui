@@ -6,7 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {path : '', redirectTo: 'hr', pathMatch: 'full'},
   { path: 'profile', redirectTo: 'commons', pathMatch: 'full'},
-  { path: 'login', redirectTo: 'auth', pathMatch: 'full'}
+  { path: 'login', redirectTo: 'auth', pathMatch: 'full'},
+  { path: 'reports', redirectTo: 'commons', pathMatch: 'full'}
 ];
 
 @NgModule({
