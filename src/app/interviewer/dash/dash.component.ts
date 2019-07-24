@@ -123,8 +123,8 @@ export class DashComponent implements OnInit {
     const dialogRef = this.dialog.open(SlotDialogComponent,{
       data:{showDelete,event},
       autoFocus: false,
-      height:"12vw",
-      width:"25vw"
+      // height:"12vw",
+      // width:"25vw"
     });
 
 

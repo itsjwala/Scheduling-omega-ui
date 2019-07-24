@@ -1,4 +1,4 @@
-import { Roles } from './../../Employee/Role';
+import { Roles } from '../../models/Role';
 import { AuthService } from './../auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-    
+
 
     // console.log(this.registerForm.get('password').errors);
 

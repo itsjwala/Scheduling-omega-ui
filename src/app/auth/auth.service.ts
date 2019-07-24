@@ -2,9 +2,9 @@ import { Subject } from 'rxjs';
 import { AppConstants } from './../AppConstants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import Employee from '../Employee/Employee';
+import Employee from '../models/Employee';
 import * as moment from "moment";
-import  Interviewer  from '../InterviewerDTO/interviewer';
+import  Interviewer  from '../models/interviewer';
 
 
 @Injectable({
@@ -24,7 +24,8 @@ export class AuthService {
   }
 
   getEmployeeId() {
-    return 1;
+    // return 1;
+    return 5;
   }
 
   getAuthStream() {

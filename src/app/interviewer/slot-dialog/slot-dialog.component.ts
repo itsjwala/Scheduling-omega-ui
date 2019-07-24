@@ -45,8 +45,8 @@ export class SlotDialogComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.data)
-    if(!this.isAvailableSlot&&this.data.showDelete)
-      this.dialogRef.updateSize('25vw', '21vw');
+    // if(!this.isAvailableSlot&&this.data.showDelete)
+    //   this.dialogRef.updateSize('25vw', '22vw');
 
     this.cancellationReason = new FormControl("",[Validators.required]);
 

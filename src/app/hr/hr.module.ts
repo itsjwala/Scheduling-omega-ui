@@ -14,6 +14,8 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
 import { DialogModule } from 'primeng/dialog';
 import { DashComponent } from './dash/dash.component';
 import { CommonsModule } from '../commons/commons.module';
+import { AuthModule } from '../auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { CommonsModule } from '../commons/commons.module';
     FullCalendarModule,
     DialogModule,
     CommonsModule,
+    AuthModule,
+    HttpClientModule
   ],
   exports: [
 
