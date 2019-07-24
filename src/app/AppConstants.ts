@@ -1,10 +1,20 @@
+import { AuthService } from './auth/auth.service';
+
 export class AppConstants{
+
+
+    constructor(){}
+
 
     // public static get baseURL(): string { return "http://localhost:8080/api"; }
     public static get baseURL(): string { return "http://34b2c1dd.ngrok.io/api"; }
     // public static get baseURL(): string { return 'http://localhost:8080/api'; }
 
-    public static get addScheduledSlotURL(): string { return this.baseURL+'/hrs/5/schedules';}
+    public static addScheduledSlotURL(a): string {
+
+        return this.baseURL + `/hrs/${a}/schedules`;
+
+    }
 
     public static get getCandidatesInfoURL(): string { return this.baseURL+'/candidates';}
 

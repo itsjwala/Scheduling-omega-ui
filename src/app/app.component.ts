@@ -34,9 +34,10 @@ export class AppComponent {
   constructor(private authService: AuthService){}
 
   ngOnInit(){
-    this.authService.getAuthStream()
-    .subscribe((e: any) => {
-      this.loggedIn = e;
-    })
+
+    // this.authService.getAuthStream()
+    // .subscribe((e: any) => {
+    //   this.loggedIn = e;
+    // })
   }
 }

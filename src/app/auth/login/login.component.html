@@ -5,7 +5,11 @@
                 <img src="../../../assets/img-01.png" alt="IMG" class="animated bounce delay-3s infinite">
             </div>
 
+
+
+
             <form class="login100-form validate-form" [formGroup]="registerForm">
+
                 <span class="login100-form-title">
                     Member Register
                 </span>
@@ -107,12 +111,12 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" 
+                    <button class="login100-form-btn"
                     *ngIf="role==='HR'" [disabled]="!this.registerForm.valid"
-                    (click)="registerForm($event)">
+                    (click)="registerUser($event)">
                         Register
                     </button>
-                    <button class="login100-form-btn" 
+                    <button class="login100-form-btn"
                     *ngIf="role==='Interviewer'" [disabled]="!this.registerForm.valid"
                     (click)="addPreferences($event)">
                         Next
@@ -141,7 +145,8 @@
     </div>
 </div>
 
-<!-- <pre>
-        {{registerForm.value | json}}
-        {{registerForm.get('password').error.minLength}}
-    </pre> -->
+<pre>
+                        {{registerForm.value | json}}
+                        {{registerForm.valid}}
+                        <!-- {{registerForm.get('password').error.minLength}} -->
+                </pre>

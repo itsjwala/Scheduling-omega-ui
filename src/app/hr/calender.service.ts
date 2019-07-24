@@ -154,7 +154,7 @@ export class CalenderService {
 
     console.log(scheduleSLotDTO);
 
-    this.http.post(AppConstants.addScheduledSlotURL, scheduleSLotDTO)
+    this.http.post(AppConstants.addScheduledSlotURL(this.authService.getEmployeeId()), scheduleSLotDTO)
       .subscribe((e: any) => {
         // console.log(e);
 
