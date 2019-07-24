@@ -13,9 +13,9 @@
         </h4> -->
         <form [formGroup]="scheduleForm">
             <mat-chip-list class="side-info">
-                <mat-chip class="heading-small">{{data.slot.slot.to.split('T')[0]}}</mat-chip>&nbsp;
-                <mat-chip class="heading-small">{{data.slot.slot.from.split('T')[1]}}</mat-chip>&nbsp;
-                <mat-chip class="heading-small">{{data.slot.slot.to.split('T')[1]}}</mat-chip>
+                <mat-chip class="heading-small">{{viewSlot.from.toDateString()}}</mat-chip>&nbsp;
+                <mat-chip class="heading-small">{{data.slot.slot.from.split('T')[1].substr(0,5)}}</mat-chip>&nbsp;
+                <mat-chip class="heading-small">{{data.slot.slot.to.split('T')[1].substr(0,5)}}</mat-chip>
             </mat-chip-list>
             <mat-chip-list>
                 <mat-chip class="heading-imp">{{data.slot.interviewerName}}</mat-chip>
@@ -27,7 +27,7 @@
             <hr>
 
             <span class="dropdown">
-                <button class="btn  dropdown-toggle" type="button" 
+                <button class="btn  dropdown-toggle" type="button"
                 id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Tech
@@ -38,7 +38,7 @@
                 </div>
             </span> &nbsp;
             <span class="dropdown">
-                <button class="btn dropdown-toggle" type="button" 
+                <button class="btn dropdown-toggle" type="button"
                 id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Level
@@ -54,7 +54,7 @@
                 <mat-form-field class="example-full-width" style="width: 48%">
                     <input matInput placeholder="Candidate Name" formControlName="candidateName"
                         [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" 
+                    <mat-autocomplete #auto="matAutocomplete"
                     (optionSelected)='getCandidateName($event.option.value)'>
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                             {{option}}
@@ -69,7 +69,7 @@
                 </mat-form-field>
             </div>
             &nbsp;
-            <!-- <mat-form-field class="example-full-width" style="width: 30%"> 
+            <!-- <mat-form-field class="example-full-width" style="width: 30%">
                  <input matInput placeholder="CV" formControlName="candidateCV" readonly> &nbsp;-->
             <input placeholder="CV" formControlName="candidateCV" readonly> &nbsp;
             <!-- </mat-form-field> -->
@@ -89,5 +89,5 @@
 
 <!-- <pre>
     {{scheduleForm.value | json}}
-     {{scheduleForm.valid}} 
+     {{scheduleForm.valid}}
 </pre> -->

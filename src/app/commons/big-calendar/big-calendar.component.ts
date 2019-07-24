@@ -29,6 +29,13 @@ export class BigCalendarComponent implements OnInit {
   ngOnInit() {
     this.options = {
       ...this.options,
+      // datesRender: (info) => {
+      //   // this.calendar.getCalendar().gotoDate(event.date);
+      //   console.log(info)
+      //   // this.calendarIntrService.bigToSmallCalendarStream.next(event.date);
+
+      // },
+
       timeZone: 'local',
       defaultDate: new Date(),
       // height: window.innerHeight * 0.9,
@@ -38,7 +45,9 @@ export class BigCalendarComponent implements OnInit {
         center: 'title',
         right: 'timeGridWeek,listWeek,listMonth'
       },
-      eventColor: '#4fc3f7',
+      eventColor: '#76FF03',
+      // eventBackgroundColor: '#76FF03',
+
       // eventRender: function (event, element, view) {
       //   if (event.color) {
       //     element.css('background-color', event.color)
@@ -52,6 +61,8 @@ export class BigCalendarComponent implements OnInit {
       hiddenDays: [],
       defaultView: 'timeGridWeek',
       allDaySlot: false,
+      maxTime: "14:00:00",
+      minTime: "04:00:00",
       // maxTime: "08:00:00",
       // minTime: "22:00:00",
       slotDuration: "00:30:00",
@@ -73,19 +84,6 @@ export class BigCalendarComponent implements OnInit {
     })
 
   }
-
-  // ngDoCheck(){
-
-  //   if(this.fcCalendar.calendar){
-  //     console.log(this.fcCalendar.calendar.getEventSources())
-
-  //     // this.fcCalendar.calendar.getEventSources()[0].refetch()
-  //     // this.fcCalendar.calendar.refetchEvents()
-
-  //   }
-  //   console.log("do check");
-  // }
-
 
 
 }

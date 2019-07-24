@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { MaterialModule } from '../material/material.module';
 
 
@@ -12,7 +12,7 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
 import { DialogModule } from 'primeng/dialog';
 import { DashComponent } from './dash/dash.component';
 import { CommonsModule } from '../commons/commons.module';
-import { AvailableSlotDialogComponent } from './available-slot-dialog/available-slot-dialog.component';
+import { SlotDialogComponent } from './slot-dialog/slot-dialog.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '../auth/auth.module';
@@ -21,7 +21,7 @@ import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
-  declarations: [DashComponent, AvailableSlotDialogComponent],
+  declarations: [DashComponent, SlotDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -31,13 +31,15 @@ import { AuthModule } from '../auth/auth.module';
     MaterialModule,
     CommonsModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
 
   ],
   entryComponents: [
-    AvailableSlotDialogComponent
+    SlotDialogComponent
   ]
 
 })

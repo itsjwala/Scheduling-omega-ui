@@ -1,0 +1,49 @@
+<ng-template #date>
+
+    <mat-chip-list>
+        <mat-chip class="heading-small">{{viewDate}}</mat-chip>&nbsp;
+        <mat-chip class="heading-small">{{viewFrom}}</mat-chip>&nbsp;
+        <mat-chip class="heading-small">{{viewTo}}</mat-chip>
+    </mat-chip-list>
+
+</ng-template>
+<div>
+<h4>{{ !data.showDelete? "Add Slot?" : isAvailableSlot ?"Delete Slot?":"Cancel Interview?"}}</h4>
+
+<!-- div for showing when available or selection -->
+<div *ngIf="isAvailableSlot|| !data.showDelete">
+
+    <div *ngIf="undefined else date" ></div>
+
+</div>
+
+<!-- div for showing when schedule -->
+<div *ngIf="data.showDelete && !isAvailableSlot">
+    <div *ngIf="undefined else date" ></div>
+
+    <mat-chip-list>
+        <mat-chip class="heading-small">{{props.scheduleSlot.level}}</mat-chip>&nbsp;
+        <mat-chip class="heading-small">{{props.scheduleSlot.technology}}</mat-chip>
+    </mat-chip-list>
+    <!-- <p>
+        Cancel this Scheduled Interview?
+    </p> -->
+    <mat-form-field class="example-full-width" >
+        <textarea [formControl]="cancellationReason" matInput placeholder="Enter cancellation reason"></textarea>
+    </mat-form-field>
+
+</div>
+
+<div class="mybutton-grp">
+    <button *ngIf="!data.showDelete" class="btn btn-sm btn-warning"
+        (click)="dialogRef.close('CONFIRM')">Confirm</button>
+
+    <button *ngIf="data.showDelete && isAvailableSlot" class="btn btn-sm btn-danger" (click)="dialogRef.close('DELETE')">Delete</button>
+    <button *ngIf="data.showDelete && !isAvailableSlot" class="btn btn-sm btn-danger" [disabled]="!cancellationReason.valid" (click)="cancelScheduleHandler()">Delete</button>
+
+    &nbsp;&nbsp;
+
+    <button class="btn btn-sm btn-light" (click)="dialogRef.close('CANCEL')">Cancel</button>
+</div>
+
+</div>

@@ -28,6 +28,7 @@ export class ScheduleFormComponent implements OnInit {
   startTime;
   endTime;
   slotDate;
+  viewSlot;
   candidatesData: any = [];
   candidateData = {};
 
@@ -44,6 +45,9 @@ export class ScheduleFormComponent implements OnInit {
 
   ngOnInit() {
     // console.log("dsfsdfdsfd")
+    this.viewSlot = this.data.slot.slot;
+    this.viewSlot.from = new Date(this.viewSlot.from)
+    this.viewSlot.to = new Date(this.viewSlot.to)
     this.scheduleForm = this.fb.group({
       candidateID: [''],
       candidateName: ['', Validators.required],
@@ -126,25 +130,4 @@ export class ScheduleFormComponent implements OnInit {
 
   }
 
-  // open(event) {
-  //   console.log(event);
-  //   console.log(event._def.extendedProps);
-
-  //   let start = event.start;
-  //   let end = event.end;
-
-  //   this.startTime = `${start.getHours()}:${start.getMinutes() ? start.getMinutes() : '00'}`;
-
-  //   if (end)
-  //     this.endTime = `${end.getHours()}:${end.getMinutes() ? end.getMinutes() : '00'}`;
-
-  //   this.slotDate = `${event.start.getDate()}/${event.start.getMonth()}/${event.start.getFullYear()}`;
-  //   this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-  //     console.log(result);
-  //     console.log(this.scheduleForm.value);
-  //   }, (reason) => {
-  //     console.log("Closed");
-
-  //   });
-  // }
 }

@@ -26,6 +26,7 @@ import {
     MatCheckboxModule,
     MatSnackBarModule,
     MatChipsModule
+
   ],
   exports: [
     MatToolbarModule,

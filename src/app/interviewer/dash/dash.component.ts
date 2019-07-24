@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { InterviewerService } from '../interviewer.service';
 import { CalendarService } from '../calendar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AvailableSlotDialogComponent } from '../available-slot-dialog/available-slot-dialog.component';
+import { SlotDialogComponent } from '../slot-dialog/slot-dialog.component';
 import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
 import { BigCalendarComponent } from 'src/app/commons/big-calendar/big-calendar.component';
 
@@ -29,6 +29,7 @@ export class DashComponent implements OnInit {
 
   slotForm: FormGroup;
 
+  subscription;
 
   constructor(private calendarService: CalendarService, private interviewerSvc: InterviewerService, private dialog: MatDialog, private snackbarServive: ShowSnackBarService) { }
 
@@ -41,7 +42,10 @@ export class DashComponent implements OnInit {
         cb(this.events);
       },
       select: (event) => {
-        this.openDialog(false);
+
+
+
+        this.openDialog(false,event);
 
       },
       eventClick: (event) => {
@@ -50,8 +54,21 @@ export class DashComponent implements OnInit {
 
 
       },
-      eventRender: (event) => {
-        // console.log("event", event);
+      eventRender: (info) => {
+          // console.log("event", info);
+          let slot = info.event.extendedProps;
+          // let {slot} =
+
+          if(slot.availableSlot){
+          }
+
+          if(slot.scheduleSlot){
+            info.el.style.backgroundColor ="#FFEB3B"
+            info.el.style.borderColor ="#FFEB3B"
+          }
+          // return info;
+
+
       }
 
     };
@@ -67,27 +84,52 @@ export class DashComponent implements OnInit {
 
 
 
+
+
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+    // this.calendarService.createStreamAgain();
+    // this.calendarService.eventSubject.unsubscribe();
+    // this.calendarService.eventSubject.complete();
   }
 
   ngAfterViewInit(){
-    this.calendarService.eventSubject.subscribe(events => {
-      // console.log(events);
+    // console.log()
+
+
+    // this.calendarService.streamSendDataAgain();
+
+
+    this.subscription = this.calendarService.eventSubject.subscribe(events => {
+      // console.log("subscrpiton",events);
       this.events = events;
+      // console.log(this.bigCalendar.fcCalendar);
+
+      // if(this.bigCalendar.fcCalendar.calendar)
       this.bigCalendar.fcCalendar.calendar.refetchEvents();
     })
+    //hack/patch this call back will be registered later
+    this.calendarService.sendEventsToStreamAgain();
+
+  }
+  ngAfterViewChecked(){
+    // console.log("view chedkd");
   }
 
-  openDialog(showDelete, event?){
+  openDialog(showDelete, event){
 
 
-    const dialogRef = this.dialog.open(AvailableSlotDialogComponent,{
-      data:showDelete,
-      autoFocus: false
+    const dialogRef = this.dialog.open(SlotDialogComponent,{
+      data:{showDelete,event},
+      autoFocus: false,
+      height:"12vw",
+      width:"25vw"
     });
 
 
     dialogRef.afterClosed().subscribe(result=>{
-
+      console.log(result);
       if(result===undefined || result==="CANCEL"){
         //do nothing
       }
@@ -95,14 +137,22 @@ export class DashComponent implements OnInit {
         // add slot
         //available
 
-        this.snackbarServive.openSnackBar("Slot added successfully");
+
+        this.calendarService.addSlotBetween(event.start,event.end);
+
+
       }
-      else if(result === "DELETE"){
+      else if(result === "DELETE" || result.btn === "DELETE"){
         // delete slot
 
-        //available or schedule
-        this.snackbarServive.openSnackBar("Slot deleted successfully");
-
+        if (event.event.extendedProps.availableSlot){
+          this.calendarService.deleteAvailableSlot(event.event);
+        }
+        else{
+          // console.log(result.cancellationReason)
+          // result.cancellationResult;
+          this.calendarService.cancelScheduleSlot(event.event, result.cancellationReason);
+        }
       }
 
 
