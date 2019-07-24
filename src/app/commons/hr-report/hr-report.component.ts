@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import * as moment from "moment";
+import { GridApi } from '../../../../node_modules/ag-grid-community';
 
 @Component({
   selector: 'app-hr-report',
@@ -14,6 +15,7 @@ export class HrReportComponent implements OnInit {
   // reportHR = [];
   to = '';
   from = '';
+  gridApi: GridApi;
 
   columnDefs = [
     { headerName: 'name', field: 'hrName', sortable: true, filter: true },
@@ -44,6 +46,13 @@ export class HrReportComponent implements OnInit {
   ngOnInit() {
   }
 
+  onGridReady(params) {
+    console.log(params);
+    this.gridApi = params.api;
+    // this.gridApi = params.columnApi;
+    console.log(this.gridApi);
+  }
+
   toSelected(event){
     this.to = moment(event.value).format().split('+')[0];
     // console.log(moment(this.to).format());
@@ -62,6 +71,16 @@ export class HrReportComponent implements OnInit {
       this.rowData = e;
       this.spinner.hide();
     });
+  }
+
+  exportExcel(){
+    const params = {
+      columnGroups: true,
+      allColumns: true,
+      fileName: 'report'
+    };
+    console.log("pressed");
+    this.gridApi.exportDataAsCsv(params);
   }
 
 }
