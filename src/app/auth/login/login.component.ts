@@ -46,14 +46,14 @@ export class LoginComponent implements OnInit {
   registerUser(event) {
     event.preventDefault();
     // console.log(this.registerForm);
-    this.authService.login(this.registerForm);
+    // this.authService.login(this.registerForm);
     this.router.navigate(['']);
   }
 
   addPreferences(event){
     event.preventDefault();
     // console.log(this.registerForm);
-    this.authService.login(this.registerForm);
+    // this.authService.login(this.registerForm);
     this.router.navigate(['preferences']);
   }
 

@@ -45,14 +45,14 @@ export class RegisterComponent implements OnInit {
   registerUser(event) {
     event.preventDefault();
     // console.log(this.registerForm);
-    this.authService.login(this.registerForm);
+    this.authService.register(this.registerForm);
     this.router.navigate(['']);
   }
 
   addPreferences(event){
     event.preventDefault();
     // console.log(this.registerForm);
-    this.authService.login(this.registerForm);
+    this.authService.register(this.registerForm);
     this.router.navigate(['preferences']);
   }
 

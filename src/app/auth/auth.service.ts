@@ -12,27 +12,30 @@ import  Interviewer  from '../models/interviewer';
 })
 export class AuthService {
   //role and auth code here
-  token: string;
+  // token: string;
 
-  id :number;
-  role:string;
-  employee: Employee;
+  // id :number;
+  // role:string;
+  employee;
+
   interviewer: Interviewer;
   // authStream = new Subject();
   constructor(private http: HttpClient) { }
 
 
   getToken() {
-    return this.token;
+    return localStorage.getItem('token');
+
   }
 
   getEmployeeId() {
     // return 1;
-    return this.id;
+
+    return localStorage.getItem('id');
   }
 
   getRole(){
-    return this.role;
+    return localStorage.getItem('role');
   }
 
 
@@ -49,11 +52,13 @@ export class AuthService {
       .subscribe(res => this.setSession(res))
   }
 
-  login(registerForm) {
+  register(registerForm) {
     let { name, email, wissenId, phoneNum, role, password } = registerForm.value;
     this.employee = new Employee(email, name, wissenId, phoneNum, role.toUpperCase());
     console.log(this.employee);
-    this.http.post(AppConstants.addEmployee, { ...this.employee, password: password})
+    this.employee = { ...this.employee, password };
+    if (role === "HR")
+      this.http.post(AppConstants.addEmployee, this.employee )
       .subscribe(res => this.setSession(res))
   }
 
@@ -61,12 +66,14 @@ export class AuthService {
 
     let claim = this.decodeJwt(authResult.token);
     console.log(claim);
-    this.id = claim.id;
-    this.role = claim.role;
+    // claim.id;
+    // claim.role;
 
     const expiresAt = moment().add(claim.exp, 'milliseconds');
 
-    localStorage.setItem('id', ""+this.id);
+    localStorage.setItem('id', ""+claim.id);
+    localStorage.setItem('role', ""+claim.role);
+    localStorage.setItem('token', ""+authResult.token);
     localStorage.setItem("exp", ""+expiresAt.valueOf());
   }
 
@@ -82,8 +89,10 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("token");
     localStorage.removeItem("exp");
+    localStorage.removeItem("id");
+    localStorage.removeItem("role");
   }
 
   public isLoggedIn() {
