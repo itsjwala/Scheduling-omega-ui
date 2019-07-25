@@ -44,11 +44,10 @@ export class PreviousScheduleComponent implements OnInit {
     {
       headerName: 'status', field: 'feedbackDTO.status', editable: true,
       // cellRenderer: 'statusCellRenderer',
-      // cellEditor: 'agRichSelectCellEditor',
-      // cellEditorParams: {
-      //   cellRenderer: 'statusCellRenderer',
-      //   values: ['Accepted', 'Rejected', 'Pending']
-      // }
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['ACCEPTED', 'REJECTED']
+      }
     }
   ];
 
