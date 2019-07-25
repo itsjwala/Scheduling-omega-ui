@@ -32,6 +32,10 @@ export class AppConstants{
 
     public static loginUser(): string{ return this.baseURL + '/login'}
 
+    public static postFeedback(id: number): string{ return this.baseURL + `/interviewers/${id}/schedules/feedback`}
+
+    public static getPreviousSLots(id: number): string { return this.baseURL + `/interviewers/${id}/schedules/previous`}
+
     public static  getHRReport(from, to): string {  return this.baseURL+`/reports/hrs?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 
     public static  getInteviewerReport(from, to): string { return this.baseURL+`/reports/interviewers?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
