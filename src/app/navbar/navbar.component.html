@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
 
         <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
@@ -39,4 +39,48 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand>
+    <a class="navbar-brand" routerLink="/">
+        <img src="../../assets/wissen.png" height="30" class="d-inline-block align-top"
+            alt="wissen logo">
+    </a>
+</mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect>
+                    <span><i class="fa fa-envelope"></i></span> Contact
+                </a>
+            </li>
+
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    <span><i class="fa fa-user"></i></span> Profile
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Register</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Login</a>
+                </div>
+            </li>
+
+        </ul>
+        <!-- Links -->
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->

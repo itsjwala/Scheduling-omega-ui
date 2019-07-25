@@ -145,7 +145,7 @@ export class CalenderService {
 
     scheduleSLotDTO.setSlotId = result.slotId;
     scheduleSLotDTO.setInterviewerId = result.interviewerId;
-    scheduleSLotDTO.setHrId = this.authService.getEmployeeId();
+    scheduleSLotDTO.setHrId = Number.parseInt(this.authService.getEmployeeId());
     scheduleSLotDTO.setInterviewDescription = result.interviewDescr;
     scheduleSLotDTO.setCandidate = candidate;
     scheduleSLotDTO.setTechnologyId = result.technologyId;

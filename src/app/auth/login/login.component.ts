@@ -51,6 +51,6 @@ export class LoginComponent implements OnInit {
 
   getRole(role) {
     this.role = role;
-    
+
   }
 }

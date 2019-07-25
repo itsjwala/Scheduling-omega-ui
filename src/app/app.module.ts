@@ -17,13 +17,21 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HrRoutingModule } from './hr/hr-routing.module';
 import {CommonsRoutingModule} from './commons/commons-routing.module';
 import { InterviewerRoutingModule } from './interviewer/interviewer-routing.module';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
+// For MDB Angular Free
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MaterialModule } from './material/material.module';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,9 @@ import { InterviewerRoutingModule } from './interviewer/interviewer-routing.modu
     CommonsRoutingModule,
     InterviewerRoutingModule,
     AppRoutingModule,
+    MaterialModule,
+    MDBBootstrapModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
