@@ -49,12 +49,20 @@ export class AuthService {
       .subscribe(res => this.setSession(res))
   }
 
-  login(registerForm) {
+  register(registerForm) {
     let { name, email, wissenId, phoneNum, role, password } = registerForm.value;
     this.employee = new Employee(email, name, wissenId, phoneNum, role.toUpperCase());
     console.log(this.employee);
     this.http.post(AppConstants.addEmployee, { ...this.employee, password: password})
       .subscribe(res => this.setSession(res))
+  }
+
+  login(loginForm) {
+    let {email, password} = loginForm.value;
+    this.http.post(AppConstants.loginUser(), {
+      'username': email,
+      password
+    }).subscribe(res => this.setSession(res));
   }
 
   private setSession(authResult) {

@@ -7,7 +7,7 @@ export class AppConstants{
 
 
     // public static get baseURL(): string { return "http://localhost:8080/api"; }
-    public static get baseURL(): string { return "http://34b2c1dd.ngrok.io/api"; }
+    public static get baseURL(): string { return "http://9f4b96a0.ngrok.io/api"; }
     // public static get baseURL(): string { return 'http://localhost:8080/api'; }
 
     public static addScheduledSlotURL(a): string {
@@ -27,6 +27,8 @@ export class AppConstants{
     public static get addEmployee(): string { return this.baseURL+ '/employees';}
 
     public static get addInterviewer(): string { return this.baseURL+ '/employees/interviewers';}
+
+    public static loginUser(): string{ return this.baseURL + '/login'}
 
     public static  getHRReport(from, to): string {  return this.baseURL+`/reports/hrs?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 
