@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -5,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import * as moment from "moment";
-
 
 
 import { LoginComponent } from './login/login.component';
@@ -16,7 +16,7 @@ import { TokenInterceptor } from './jwt.interceptor';
 
 
 @NgModule({
-  declarations: [LoginComponent, PreferencesComponent],
+  declarations: [LoginComponent, PreferencesComponent, RegisterComponent],
   imports: [
     CommonModule,
     RouterModule,

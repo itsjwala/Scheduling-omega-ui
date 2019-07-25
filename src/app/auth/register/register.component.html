@@ -1,0 +1,152 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="../../../assets/img-01.png" alt="IMG" class="animated bounce delay-3s infinite">
+            </div>
+
+
+
+
+            <form class="login100-form validate-form" [formGroup]="registerForm">
+
+                <span class="login100-form-title">
+                    Member Register
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <input class="input100" type="text" formControlName="email" placeholder="abc@wissen.com">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('email').errors.required">
+                        Email is required.
+                    </div>
+                    <div *ngIf="registerForm.get('email').errors.email">
+                        enter correct email id
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid name is required">
+                    <input class="input100" type="text" formControlName="name" placeholder="name">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('name').errors.required">
+                        name is required
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid Wissen Id is required: WT---">
+                    <input class="input100" type="text" formControlName="wissenId" placeholder="WTXXX">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-id-badge" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div *ngIf="registerForm.get('wissenId').invalid && (registerForm.get('wissenId').dirty || registerForm.get('wissenId').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('wissenId').errors.required">
+                        ID is required
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid number is required">
+                    <input class="input100" type="number" formControlName="phoneNum" placeholder="+91-">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div *ngIf="registerForm.get('phoneNum').invalid && (registerForm.get('phoneNum').dirty || registerForm.get('phoneNum').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('phoneNum').errors.required">
+                        phone number is required
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" type="password" formControlName="password" placeholder="Password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('password').errors.required">
+                        password is required
+                    </div>
+                </div>
+                <!-- <div *ngIf="registerForm.get('password').errors.minlength" class="alert alert-danger">
+                        password should br atleast 5 characters
+                    </div> -->
+
+                <div class="wrap-input100 validate-input">
+                    <input matInput class="input100" type="text" formControlName="role" [matAutocomplete]="auto"
+                        placeholder="Role">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getRole($event.option.value)'>
+                        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div *ngIf="registerForm.get('role').invalid && (registerForm.get('role').dirty || registerForm.get('role').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="registerForm.get('role').errors.required">
+                        role must be specified
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn"
+                    *ngIf="role==='HR'" [disabled]="!this.registerForm.valid"
+                    (click)="registerUser($event)">
+                        Register
+                    </button>
+                    <button class="login100-form-btn"
+                    *ngIf="role==='Interviewer'" [disabled]="!this.registerForm.valid"
+                    (click)="addPreferences($event)">
+                        Next
+                    </button>
+                </div>
+
+
+
+                <!-- <div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+					</div> -->
+
+                <!-- <div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div> -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<pre>
+                        {{registerForm.value | json}}
+                        {{registerForm.valid}}
+                        <!-- {{registerForm.get('password').error.minLength}} -->
+                </pre>
