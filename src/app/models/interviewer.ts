@@ -2,18 +2,18 @@ import Employee from './Employee';
 
 export default class Interviewer{
     private emp: Employee;
-    private level: Array<Object>;
-    private technology: Array<Object>;
+    private levels: Array<Object>;
+    private technologies: Array<Object>;
 
     set setEmployee(emp){
         this.emp = emp;
     }
 
-    set setLevel(level){
-        this.level = level;
+    set setLevel(levels){
+        this.levels = levels;
     }
 
     set setTechnology(tech){
-        this.technology = tech;
+        this.technologies = tech;
     }
 }

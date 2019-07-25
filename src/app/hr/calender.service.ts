@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
 import { ShowSnackBarService } from '../commons/show-snack-bar.service';
 import * as moment from 'moment';
+import { FilterService } from './filter.service';
 
 
 @Injectable({
@@ -15,14 +16,113 @@ import * as moment from 'moment';
 })
 export class CalenderService {
 
+  // events = [];
+
+
   events = [];
+
+
 
   eventSubject: Subject<any> = new Subject();
   hashDateRanges = {}
+  filter;
 
 
 
-  constructor(private hrService: HrService, private http: HttpClient, private authService: AuthService, private snackbarServive: ShowSnackBarService, private _http:HttpClient) { }
+  filterFunction() {
+    let obj = this.filter;
+    // console.log(obj);
+    //clear filter
+    if (obj === null) {
+      this.eventSubject.next(this.events);
+      return;
+    }
+
+
+    //schedule filter
+    let filterEvents = this.events.filter((e: any) => {
+
+      if (obj.scheduled) {
+        if (e.availableSlot)
+          return false;
+        else {
+          console.log(e)
+          return true;
+        }
+      }
+      else
+        return true;
+    });
+
+
+    //interviwewer name filter
+    if (obj.interviewerName !== null && obj.interviewerName.length > 0) {
+      filterEvents = filterEvents.filter((e: any) => {
+
+        if (e.availableSlot)
+          return e.availableSlot.interviewerName === obj.interviewerName;
+        else
+          return e.scheduleSlot.interviewerName === obj.interviewerName;
+
+      })
+    }
+    if (obj.levelFields) {
+      filterEvents = filterEvents.filter((e: any) => {
+        // console.log(e)
+        if (e.availableSlot) {
+
+          let flag = e.availableSlot.levels.find(level => {
+            return level.level === obj.levelFields;
+          })
+          return flag !== undefined;
+        }
+        else {
+          return e.scheduleSlot.level === obj.levelFields;
+        }
+
+
+      })
+    }
+
+
+    if (obj.technologyFields) {
+      filterEvents = filterEvents.filter((e: any) => {
+        // console.log(e)
+        if (e.availableSlot) {
+
+          let flag = e.availableSlot.technologies.find(tech => {
+            return tech.technology === obj.technologyFields;
+          })
+          return flag !== undefined;
+        }
+        else {
+          return e.scheduleSlot.technology === obj.technologyFields;
+        }
+
+
+      })
+    }
+
+
+
+
+    // console.log(filterEvents)
+    this.eventSubject.next(filterEvents);
+
+  }
+
+  constructor(private hrService: HrService, private http: HttpClient, private authService: AuthService, private snackbarServive: ShowSnackBarService, private _http: HttpClient, private filterService: FilterService) {
+    this.filterService.filterEventSubject.subscribe((obj: any) => {
+
+
+      this.filter = obj;
+
+      this.filterFunction();
+
+
+    });
+
+  }
 
   private parseAvailableToEvent(obj) {
     return {
@@ -44,9 +144,9 @@ export class CalenderService {
 
   }
 
-  fetchEvents(curStart, curEnd){
+  fetchEvents(curStart, curEnd) {
     let key = curStart.toISOString() + curEnd.toISOString();
-    console.log(this.hashDateRanges)
+    // console.log(this.hashDateRanges)
     if (!this.hashDateRanges[key]) {
       let begin = moment(curStart).isoWeekday(1).subtract(1, 'day');
       let end = moment(curEnd).isoWeekday(7);
@@ -87,7 +187,11 @@ export class CalenderService {
 
         this.events = this.events.concat(tempevts);
 
-        this.eventSubject.next(this.events);
+        if (this.filter) {
+          this.filterFunction();
+        }
+        else
+          this.eventSubject.next(this.events);
         // console.log(this.events);
       })
       let url2 = `${AppConstants.baseURL}/hrs/${this.authService.getEmployeeId()}/schedules?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
@@ -109,7 +213,11 @@ export class CalenderService {
 
         this.events = this.events.concat(tempevts);
 
-        this.eventSubject.next(this.events);
+        if (this.filter) {
+          this.filterFunction();
+        }
+        else
+          this.eventSubject.next(this.events);
 
 
         // console.log(this.events);
@@ -119,19 +227,27 @@ export class CalenderService {
     }
     else {
       console.log("after coming from profile", this.events);
-      this.eventSubject.next(this.events);
+      if (this.filter) {
+        this.filterFunction();
+      }
+      else
+        this.eventSubject.next(this.events);
 
     }
     return null;
   }
 
   sendEventsToStreamAgain() {
-    this.eventSubject.next(this.events);
+    if (this.filter) {
+      this.filterFunction();
+    }
+    else
+      this.eventSubject.next(this.events);
 
   }
 
 
-  scheduleSlot(result){
+  scheduleSlot(result) {
 
     console.log("dialog closed", result);
     // console.log(this.events);
@@ -162,27 +278,31 @@ export class CalenderService {
 
 
 
-        this.events = this.events.filter(e=> {
-          if(e.scheduleSlot) return true;
+        this.events = this.events.filter(e => {
+          if (e.scheduleSlot) return true;
 
           return e.availableSlot.slotId !== result.slotId
 
         })
 
-        this.events =  this.events.concat(scheduleEvent);
+        this.events = this.events.concat(scheduleEvent);
 
-        this.eventSubject.next(this.events);
+        if (this.filter) {
+          this.filterFunction();
+        }
+        else
+          this.eventSubject.next(this.events);
 
         this.snackbarServive.openSnackBar("Interview Scheduled Successfull");
-      },(error)=>{
+      }, (error) => {
         console.log(error);
-          this.snackbarServive.openSnackBar("Problem Scheduling Interview");
+        this.snackbarServive.openSnackBar("Problem Scheduling Interview");
       });
 
 
-    }
+  }
 
-  cancelInterview(scheduleId,cancellationReason){
+  cancelInterview(scheduleId, cancellationReason) {
     console.log(scheduleId);
 
     let url = `${AppConstants.baseURL}/hrs/${this.authService.getEmployeeId()}/schedules/${scheduleId}`;
@@ -195,13 +315,17 @@ export class CalenderService {
 
 
         this.events = this.events.filter(e => {
-          if(e.availableSlot) return true;
+          if (e.availableSlot) return true;
 
           return e.scheduleSlot.scheduleID !== scheduleId
 
         });
         this.events = this.events.concat(this.parseAvailableToEvent(response));
-        this.eventSubject.next(this.events);
+        if (this.filter) {
+          this.filterFunction();
+        }
+        else
+          this.eventSubject.next(this.events);
 
         this.snackbarServive.openSnackBar("Interview cancelled successfully");
 

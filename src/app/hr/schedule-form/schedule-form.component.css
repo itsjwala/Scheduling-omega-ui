@@ -29,3 +29,7 @@
 .submit-form{
     float: right;
 }
+
+.example-full-width{
+    width: 100%;
+}

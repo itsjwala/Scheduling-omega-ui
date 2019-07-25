@@ -22,27 +22,23 @@
 
             <div *ngIf="data.isAvailable">
                 <hr>
-
-                <span class="dropdown">
-                    <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Tech
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" *ngFor="let tech of data.slot.technologies"
-                            (click)="addTech(tech)">{{tech.technology}}</a>
-                    </div>
-                </span> &nbsp;
-                <span class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Level
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" *ngFor="let level of data.slot.levels"
-                            (click)="addLevel(level)">{{level.level}}</a>
-                    </div>
-                </span>
+                <mat-form-field>
+                    <mat-label>Tech</mat-label>
+                    <mat-select (selectionChange)="addTech($event.value)">
+                        <mat-option *ngFor="let tech of data.slot.technologies" [value]="tech">
+                            {{tech.technology}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
+                    <mat-label>Level</mat-label>
+                    <mat-select (selectionChange)="addLevel($event.value)">
+                        <mat-option *ngFor="let level of data.slot.levels" [value]="level">
+                            {{level.level}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
 
             <hr>
@@ -65,13 +61,12 @@
                 </mat-form-field>
             </div>
             &nbsp;
-            <!-- <mat-form-field class="example-full-width" style="width: 30%">
-                 <input  matInput placeholder="CV" formControlName="candidateCV" > &nbsp;-->
+
             <input [readonly]="!data.isAvailable" placeholder="CV" formControlName="candidateCV"> &nbsp;
-            <!-- </mat-form-field> -->
+
             <button type="button" class="btn btn-primary" (click)=scheduleFormSubmit($event)>Upload</button>
 
-            <mat-form-field class="example-full-width" style="width: 100%">
+            <mat-form-field class="example-full-width">
                 <textarea [readonly]="!data.isAvailable" matInput placeholder="Description"
                     formControlName="interviewDescr">
                     </textarea>

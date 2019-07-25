@@ -2,9 +2,6 @@
 
     <div class="card-header">Filters</div>
     <div class="card-body">
-        <!-- <pre>
-            {{filterForm.value|json}}
-        </pre> -->
         <form [formGroup]="filterForm">
             <div class="row">
                 <div class="col-12">
@@ -17,8 +14,8 @@
 
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let interviewer of filteredInterviewerNames | async"
-                            [value]="interviewer.name">
-                            {{interviewer.name}}</mat-option>
+                            [value]="interviewer.interviewerName">
+                            {{interviewer.interviewerName}}</mat-option>
                     </mat-autocomplete>
                     <div class="text-danger font-weight-light">{{errors.interviewerRequired}}</div>
                 </div>
@@ -29,8 +26,8 @@
 
                     <mat-form-field>
                         <mat-label>Levels</mat-label>
-                        <mat-select formControlName="levelFields" multiple>
-                            <mat-option *ngFor="let level of levels" [value]="level.id">{{level.level}}</mat-option>
+                        <mat-select formControlName="levelFields">
+                            <mat-option *ngFor="let level of levels" [value]="level.level">{{level.level}}</mat-option>
                         </mat-select>
                     </mat-form-field>
 
@@ -39,8 +36,8 @@
 
                     <mat-form-field>
                         <mat-label>Technologies</mat-label>
-                        <mat-select formControlName="technologyFields" multiple>
-                            <mat-option *ngFor="let technology of technologies" [value]="technology.id">
+                        <mat-select formControlName="technologyFields">
+                            <mat-option *ngFor="let technology of technologies" [value]="technology.technology">
                                 {{technology.technology}}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -49,7 +46,7 @@
             <div class="row">
                 <div class="col-12">
 
-                    <mat-checkbox formControlName="scheduled">Scheduled Interviews</mat-checkbox>
+                    <mat-checkbox formControlName="scheduled">Scheduled</mat-checkbox>
                 </div>
             </div>
             <div class="row">

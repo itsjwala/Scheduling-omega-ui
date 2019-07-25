@@ -16,10 +16,11 @@ import { DashComponent } from './dash/dash.component';
 import { CommonsModule } from '../commons/commons.module';
 import { AuthModule } from '../auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FilterComponent } from './filter/filter.component';
 
 
 @NgModule({
-  declarations: [DashComponent, ScheduleFormComponent],
+  declarations: [DashComponent, ScheduleFormComponent,FilterComponent],
   imports: [
     CommonModule,
     NgbModule,

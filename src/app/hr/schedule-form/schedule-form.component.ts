@@ -111,6 +111,7 @@ export class ScheduleFormComponent implements OnInit {
   }
 
   addTech(tech) {
+
     this.tech = tech.technology;
     this.techId = tech.id;
     this.scheduleForm.patchValue({

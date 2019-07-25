@@ -11,6 +11,7 @@ import Candidate from '../../models/candidate';
 import ScheduleSlotDTO from '../../models/scheduleSlotDTO';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BigCalendarComponent } from 'src/app/commons/big-calendar/big-calendar.component';
+import { FilterService } from 'src/app/hr/filter.service';
 
 @Component({
   selector: 'app-dash',
@@ -29,9 +30,13 @@ export class DashComponent implements OnInit {
 
   constructor(private snackbarService: ShowSnackBarService,
     private dialog: MatDialog, private calendarService: CalenderService,
-    private http: HttpClient, private authService: AuthService) { }
+    private http: HttpClient, private authService: AuthService,private filterService:FilterService) { }
 
   ngOnInit() {
+
+
+
+
     this.bigCalendarOptions = {
       selectable: false,
       events: (info, cb, errorcb) => {
