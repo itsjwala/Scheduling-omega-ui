@@ -10,6 +10,8 @@ import * as moment from "moment";
 
 import { LoginComponent } from './login/login.component';
 import { PreferencesComponent } from './preferences/preferences.component';
+import { AuthService } from './auth.service';
+import { TokenInterceptor } from './jwt.interceptor';
 
 
 
@@ -21,6 +23,10 @@ import { PreferencesComponent } from './preferences/preferences.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule
+  ],
+  providers:[
+    AuthService,
+    TokenInterceptor
   ]
 })
 export class AuthModule { }
