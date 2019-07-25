@@ -28,6 +28,8 @@ export class AppConstants{
 
     public static get addInterviewer(): string { return this.baseURL+ '/employees/interviewers';}
 
+    public static loginUser(): string{ return this.baseURL + '/login'}
+
     public static  getHRReport(from, to): string {  return this.baseURL+`/reports/hrs?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
 
     public static  getInteviewerReport(from, to): string { return this.baseURL+`/reports/interviewers?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}

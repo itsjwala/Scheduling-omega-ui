@@ -11,21 +11,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  registerForm: FormGroup;
+  role: Roles;
+  loginForm: FormGroup;
   token: string;
-  filteredOptions = ['HR', 'Interviewer'];
-  role: string;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', Validators.required],
-      wissenId: ['', Validators.required],
-      phoneNum: ['', Validators.required],
       password: ['', Validators.required],
-      role: ['', Validators.required]
     });
 
     this.token = this.authService.getToken();
@@ -38,26 +33,24 @@ export class LoginComponent implements OnInit {
     //   });
   }
 
-
-
     // console.log(this.registerForm.get('password').errors);
 
 
-  registerUser(event) {
+  loginUser(event) {
     event.preventDefault();
-    // console.log(this.registerForm);
-    // this.authService.login(this.registerForm);
+    this.authService.login(this.loginForm);
     this.router.navigate(['']);
   }
 
   addPreferences(event){
     event.preventDefault();
     // console.log(this.registerForm);
-    // this.authService.login(this.registerForm);
+    this.authService.login(this.loginForm);
     this.router.navigate(['preferences']);
   }
 
   getRole(role) {
     this.role = role;
+
   }
 }

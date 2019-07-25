@@ -62,6 +62,14 @@ export class AuthService {
       .subscribe(res => this.setSession(res))
   }
 
+  login(loginForm) {
+    let {email, password} = loginForm.value;
+    this.http.post(AppConstants.loginUser(), {
+      'username': email,
+      password
+    }).subscribe(res => this.setSession(res));
+  }
+
   private setSession(authResult) {
 
     let claim = this.decodeJwt(authResult.token);
