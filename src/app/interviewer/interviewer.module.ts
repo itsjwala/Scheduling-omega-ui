@@ -16,6 +16,7 @@ import { SlotDialogComponent } from './slot-dialog/slot-dialog.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '../auth/auth.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -33,7 +34,8 @@ import { AuthModule } from '../auth/auth.module';
     HttpClientModule,
     AuthModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   exports: [
 

@@ -1,6 +1,7 @@
 import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 import { UrlTree, UrlSerializer, DefaultUrlSerializer } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({

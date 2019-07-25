@@ -2,6 +2,7 @@ import { AppConstants } from 'src/app/AppConstants';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GridOptions } from 'ag-grid-community';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-previous-schedule',
@@ -10,33 +11,49 @@ import { GridOptions } from 'ag-grid-community';
 })
 export class PreviousScheduleComponent implements OnInit {
 
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  ngOnInit() {
+    // this.rowData = this.http.get('https://api.myjson.com/bins/15psn9');
+
+
+    let url = "";
+    let empId = Number.parseInt(this.authService.getEmployeeId());
+
+    if (this.authService.getRole() === "HR") {
+      this.columnDefs[6].editable = false;
+      this.columnDefs[7].editable = false;
+
+      url = AppConstants.getPreviousSlotsHr(empId);
+    }
+    else if(this.authService.getRole() === "INTERVIEWER"){
+      url = AppConstants.getPreviousSlotsInterviewer(empId);
+      this.columnDefs = this.columnDefs.splice(3, 1);
+    }
+    console.log(this.columnDefs)
+    console.log(url);
+
+    this.http.get(url).subscribe((e: any) => {
+      // this.rowData = e;
+      console.log(e);
+      this.rowData = e.map(curr => {
+        curr.scheduleResponseDTO.slot.date = curr.scheduleResponseDTO.slot.from.split('T')[0];
+        curr.scheduleResponseDTO.slot.from = curr.scheduleResponseDTO.slot.from.split('T')[1];
+        curr.scheduleResponseDTO.slot.to = curr.scheduleResponseDTO.slot.to.split('T')[1];
+        return curr;
+      })
+      console.log(this.rowData);
+
+    })
+  }
   sortedSchedules = [];
-  // previousSchedules = [
-  //   {
-  //     id: 1,
-  //     date: '2019-07-18',
-  //     to: '05:00',
-  //     from: '08:00',
-  //     tech: 'Java',
-  //     round: 'R1',
-  //     name: 'John Doe'
-  //   },
-  //   {
-  //     id: 2,
-  //     date: '2019-07-18',
-  //     to: '18:00',
-  //     from: '21:00',
-  //     tech: 'Angular',
-  //     round: 'R2',
-  //     name: 'Barry Allen'
-  //   }
-  // ];
 
   columnDefs = [
     // { headerName: 'id', field: 'scheduleId', sortable: true, filter: true },
     { headerName: 'date', field: 'scheduleResponseDTO.slot.date', sortable: true, filter: true },
     { headerName: 'from', field: 'scheduleResponseDTO.slot.from', sortable: true, filter: true },
     { headerName: 'to', field: "scheduleResponseDTO.slot.to", sortable: true, filter: true },
+    { headerName: 'interviewer name', field: "scheduleResponseDTO.slot.interviewerName", sortable: true, filter: true },
     { headerName: 'tech', field: 'scheduleResponseDTO.technology', sortable: true, filter: true },
     { headerName: 'round', field: 'scheduleResponseDTO.level', sortable: true, filter: true },
     { headerName: 'name', field: 'scheduleResponseDTO.candidate.name', sortable: true, filter: true },
@@ -50,6 +67,10 @@ export class PreviousScheduleComponent implements OnInit {
       }
     }
   ];
+
+
+
+
 
   gridOptions: GridOptions = {
     defaultColDef: {
@@ -78,40 +99,15 @@ export class PreviousScheduleComponent implements OnInit {
         });
       }
     }
-    // components: {
-    //   statusCellRenderer: this.StatusCellRenderer,
-    // }
+
   }
 
-  // rowData = [
-  //   { make: 'Toyota', model: 'Celica', price: 35000 },
-  //   { make: 'Ford', model: 'Mondeo', price: 32000 },
-  //   { make: 'Porsche', model: 'Boxter', price: 72000 }
-  // ];
+
 
   rowData: any;
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-    // this.rowData = this.http.get('https://api.myjson.com/bins/15psn9');
-    this.http.get(AppConstants.getPreviousSLots(1)).subscribe((e: any) => {
-      // this.rowData = e;
-      console.log(e);
-      this.rowData = e.map(curr => {
-        curr.scheduleResponseDTO.slot.date = curr.scheduleResponseDTO.slot.from.split('T')[0];
-        curr.scheduleResponseDTO.slot.from = curr.scheduleResponseDTO.slot.from.split('T')[1];
-        curr.scheduleResponseDTO.slot.to = curr.scheduleResponseDTO.slot.to.split('T')[1];
-        return curr;
-      })
-      console.log(this.rowData);
-
-    })
-  }
 
   addFeedback(event) {
     console.log(event);
   }
-  // StatusCellRenderer(params) {
-  //   return params.value;
-  // }
+
 }

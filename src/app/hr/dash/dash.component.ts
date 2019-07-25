@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { BigCalendarComponent } from 'src/app/commons/big-calendar/big-calendar.component';
 import { FilterService } from 'src/app/hr/filter.service';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
@@ -30,7 +32,7 @@ export class DashComponent implements OnInit {
 
   constructor(private snackbarService: ShowSnackBarService,
     private dialog: MatDialog, private calendarService: CalenderService,
-    private http: HttpClient, private authService: AuthService,private filterService:FilterService) { }
+    private http: HttpClient, private authService: AuthService,private filterService:FilterService,private spinner:NgxSpinnerService) { }
 
   ngOnInit() {
 
@@ -98,6 +100,8 @@ export class DashComponent implements OnInit {
 
 
     this.subscription = this.calendarService.eventSubject.subscribe(events => {
+
+      this.spinner.hide();
       // console.log("subscrpiton",events);
       this.events = events;
       // console.log(this.bigCalendar.fcCalendar);
@@ -136,6 +140,7 @@ export class DashComponent implements OnInit {
 
       // }
       if (result) {
+        this.spinner.show();
         if (isAvailable)
           this.calendarService.scheduleSlot(result);
         else if (!isAvailable) {

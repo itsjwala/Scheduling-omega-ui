@@ -10,6 +10,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SlotDialogComponent } from '../slot-dialog/slot-dialog.component';
 import { ShowSnackBarService } from 'src/app/commons/show-snack-bar.service';
 import { BigCalendarComponent } from 'src/app/commons/big-calendar/big-calendar.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class DashComponent implements OnInit {
 
   subscription;
 
-  constructor(private calendarService: CalendarService, private interviewerSvc: InterviewerService, private dialog: MatDialog, private snackbarServive: ShowSnackBarService) { }
+  constructor(private calendarService: CalendarService, private interviewerSvc: InterviewerService, private dialog: MatDialog, private snackbarServive: ShowSnackBarService,private spinner:NgxSpinnerService) { }
 
 
   ngOnInit() {
@@ -102,6 +103,7 @@ export class DashComponent implements OnInit {
 
 
     this.subscription = this.calendarService.eventSubject.subscribe(events => {
+      this.spinner.hide();
       // console.log("subscrpiton",events);
       this.events = events;
       // console.log(this.bigCalendar.fcCalendar);
@@ -137,13 +139,14 @@ export class DashComponent implements OnInit {
         // add slot
         //available
 
-
+        this.spinner.show();
         this.calendarService.addSlotBetween(event.start,event.end);
 
 
       }
       else if(result === "DELETE" || result.btn === "DELETE"){
         // delete slot
+        this.spinner.show();
 
         if (event.event.extendedProps.availableSlot){
           this.calendarService.deleteAvailableSlot(event.event);

@@ -13,8 +13,8 @@
                     Home
                 </a>
             </li>
-            <li>
-                <a href="#reportsSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+            <!-- <a href="#reportsSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fa fa-briefcase"></i>
                     Reports
                 </a>
@@ -25,22 +25,39 @@
                     <li>
                         <a routerLink='hr-reports'>HR</a>
                     </li>
-                </ul>
+                </ul> -->
+            <!-- <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fa fa-copy"></i>
                     Actions
                 </a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
-                        <a href="#">Dashboard</a>
+                        <a routerLink="#">Dashboard</a>
                     </li>
-                    <li>
-                        <a routerLink=''>Schdule Slot</a>
+                    <li *ngIf="authService.getRole() === 'INTERVIEWER' ">
+                        <a [routerLink]='authService.getRole().toLowerCase()'>Schedule Slot</a>
                     </li>
                     <li>
                         <a routerLink="previous">Previous Schedule</a>
                     </li>
                 </ul>
+            </li> -->
+
+
+            <li>
+                <a (click)="navigateToDashboard()">
+
+                    <i class="fa fa-copy"></i>
+                    Schedule
+                </a>
+            </li>
+            <li>
+                <a routerLink="previous">
+
+                    <i class="fa fa-calendar"></i>
+                    Previous Schedule
+                </a>
             </li>
             <li>
                 <a routerLink='portfolio'>

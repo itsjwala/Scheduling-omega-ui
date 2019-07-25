@@ -17,6 +17,7 @@ import { CommonsModule } from '../commons/commons.module';
 import { AuthModule } from '../auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './filter/filter.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FilterComponent } from './filter/filter.component';
     DialogModule,
     CommonsModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
   ],
   exports: [
 

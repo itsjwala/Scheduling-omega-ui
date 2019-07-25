@@ -23,6 +23,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MaterialModule } from './material/material.module';
+import { AdminModule } from './admin/admin.module';
 
 
 
@@ -36,10 +37,10 @@ import { MaterialModule } from './material/material.module';
   imports: [
     BrowserModule,
     FormsModule,
-
     HttpClientModule,
     InterviewerModule,
     HrModule,
+    AdminModule,
     AuthModule,
     CommonsModule,
     BrowserAnimationsModule,

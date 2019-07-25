@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './jwt.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -22,7 +23,8 @@ import { TokenInterceptor } from './jwt.interceptor';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxSpinnerModule
   ],
   providers:[
     AuthService,

@@ -17,9 +17,6 @@ import { MatSnackBarModule, MatAutocompleteModule, MatFormFieldModule, MatSelect
 import { ShowSnackBarService } from './show-snack-bar.service';
 import { FilterService } from '../hr/filter.service';
 import { MaterialModule } from '../material/material.module';
-import { ReportsComponent } from './reports/reports.component';
-import { InterviewerReportComponent } from './interviewer-report/interviewer-report.component';
-import { HrReportComponent } from './hr-report/hr-report.component';
 
 
 
@@ -30,9 +27,6 @@ import { HrReportComponent } from './hr-report/hr-report.component';
     AboutViewComponent,
     SmallCalendarComponent,
     BigCalendarComponent,
-    ReportsComponent,
-    InterviewerReportComponent,
-    HrReportComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +37,7 @@ import { HrReportComponent } from './hr-report/hr-report.component';
     FullCalendarModule,
     NgxSpinnerModule,
     AgGridModule.withComponents([]),
+
   ],
   exports:[
     SmallCalendarComponent,

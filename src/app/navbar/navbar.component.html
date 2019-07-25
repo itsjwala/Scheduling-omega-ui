@@ -46,11 +46,10 @@
 
     <!-- Navbar brand -->
     <mdb-navbar-brand>
-    <a class="navbar-brand" routerLink="/">
-        <img src="../../assets/wissen.png" height="30" class="d-inline-block align-top"
-            alt="wissen logo">
-    </a>
-</mdb-navbar-brand>
+        <a class="navbar-brand" routerLink="/">
+            <img src="../../assets/wissen.png" height="30" class="d-inline-block align-top" alt="wissen logo">
+        </a>
+    </mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -58,24 +57,59 @@
         <!-- Links -->
         <ul class="navbar-nav ml-auto">
 
+
+            <li *ngIf="authService.isLoggedIn() && authService.getRole() !== 'ADMIN'" class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="authService.getRole().toLowerCase()" mdbWavesEffect>
+                    <span><i class="fa fa-home"></i></span> Dashboard
+                </a>
+            </li>
+            <li *ngIf="authService.isLoggedIn() && authService.getRole() !=='ADMIN'" class="nav-item">
+                <a class="nav-link waves-light" routerLink="profile/portfolio" mdbWavesEffect>
+                    <span><i class="fa fa-user"></i></span> Profile
+                </a>
+            </li>
+
+            <li *ngIf="authService.isLoggedIn() && authService.getRole() =='ADMIN'" class="nav-item">
+                <a class="nav-link waves-light" routerLink="reports" mdbWavesEffect>
+                    <span><i class="fa fa-file"></i></span> Reports
+                </a>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link waves-light" mdbWavesEffect>
                     <span><i class="fa fa-envelope"></i></span> Contact
                 </a>
             </li>
 
+            <li *ngIf="!authService.isLoggedIn()" class="nav-item">
+                <a class="nav-link waves-light" routerLink="register" mdbWavesEffect>
+                    <span><i class="fa fa-user"></i></span> Register
+                </a>
+            </li>
+            <li *ngIf="!authService.isLoggedIn()" class="nav-item">
+                <a class="nav-link waves-light" routerLink="login" mdbWavesEffect>
+                    <span><i class="fa fa-lock"></i></span> Login
+                </a>
+            </li>
+
+            <li *ngIf="authService.isLoggedIn()" class="nav-item">
+                <a class="nav-link waves-light" href="#" (click)="logout()" mdbWavesEffect>
+                    <span><i class="fa fa-lock"></i></span> Logout
+                </a>
+            </li>
 
             <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
+            <!-- <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>
                     <span><i class="fa fa-user"></i></span> Profile
                 </a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Register</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Login</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="register">Register</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="login">Login</a>
                 </div>
-            </li>
+            </li> -->
 
         </ul>
         <!-- Links -->

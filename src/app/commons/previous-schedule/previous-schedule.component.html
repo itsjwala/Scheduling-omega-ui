@@ -1,38 +1,7 @@
-<!-- <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col" class="table-columns">Sr.</th>
-      <th scope="col" class="table-columns" (click)="sortByDate()">Date</th>
-      <th scope="col" class="table-columns">To</th>
-      <th scope="col" class="table-columns">From</th>
-      <th scope="col" class="table-columns">Tech</th>
-      <th scope="col" class="table-columns">Round</th>
-      <th scope="col" class="table-columns">Candidate Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let sortedSchedule of sortedSchedules" (hover)="hoverTable(sortedSchedule)">
-      <th scope="row">{{sortedSchedule.id}}</th>
-      <td>{{sortedSchedule.date}}</td>
-      <td>{{sortedSchedule.to}}</td>
-      <td>{{sortedSchedule.from}}</td>
-      <td>{{sortedSchedule.level}}</td>
-      <td>{{sortedSchedule.round}}</td>
-      <td>{{sortedSchedule.name}}</td>
-    </tr>
-  </tbody>
-</table> -->
 
-
-
-
-<!-- <ag-grid-angular style="width: 100%; height: 100%;" 
-class="ag-theme-balham table" 
-  [rowData]="rowData | async"
-  [columnDefs]="columnDefs">
-</ag-grid-angular> -->
 <div class="container">
-  <span class="heading">* double click field to edit</span>
+  <span class="heading">* double click feedback/status to edit</span> &nbsp; &nbsp;
+  <span class="heading">* click column to sort</span>
   <!-- <button type="submit" class="btn btn-info save">Save</button>   -->
 </div>
 <ag-grid-angular class="ag-theme-balham table" [rowData]="rowData" [gridOptions]="gridOptions"

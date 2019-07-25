@@ -3,7 +3,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import * as moment from "moment";
 import { HttpClient } from '@angular/common/http';
 import { AppConstants } from 'src/app/AppConstants';
-import { GridApi } from '../../../../node_modules/ag-grid-community';
+import { GridApi } from 'ag-grid-community';
 
 @Component({
   selector: 'app-interviewer-report',

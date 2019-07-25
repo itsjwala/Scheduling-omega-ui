@@ -1,9 +1,9 @@
-import { AppConstants } from './../../AppConstants';
+import { AppConstants } from '../../AppConstants';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import * as moment from "moment";
-import { GridApi } from '../../../../node_modules/ag-grid-community';
+import { GridApi } from 'ag-grid-community';
 
 @Component({
   selector: 'app-hr-report',
@@ -69,6 +69,7 @@ export class HrReportComponent implements OnInit {
     this.spinner.show();
     this.http.get(AppConstants.getHRReport(from, to)).subscribe((e: any) => {
       this.rowData = e;
+      console.log(this.rowData);
       this.spinner.hide();
     });
   }

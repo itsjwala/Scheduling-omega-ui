@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Employee from '../models/Employee';
 import * as moment from "moment";
-import  Interviewer  from '../models/interviewer';
+import Interviewer from '../models/interviewer';
+import { ShowSnackBarService } from '../commons/show-snack-bar.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -20,7 +22,7 @@ export class AuthService {
 
   interviewer: Interviewer;
   // authStream = new Subject();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private showSnack: ShowSnackBarService, private router: Router) { }
 
 
   getToken() {
@@ -34,13 +36,13 @@ export class AuthService {
     return localStorage.getItem('id');
   }
 
-  getRole(){
+  getRole() {
     return localStorage.getItem('role');
   }
 
 
 
-  addInterviewer(preference){
+  addInterviewer(preference) {
     console.log(this.employee);
     this.interviewer = new Interviewer();
     this.interviewer.setEmployee = this.employee;
@@ -58,20 +60,21 @@ export class AuthService {
     console.log(this.employee);
     this.employee = { ...this.employee, password };
     if (role === "HR")
-      this.http.post(AppConstants.addEmployee, this.employee )
-      .subscribe(res => this.setSession(res))
+      return this.http.post(AppConstants.addEmployee, this.employee)
+
   }
 
   login(loginForm) {
-    let {email, password} = loginForm.value;
-    this.http.post(AppConstants.loginUser(), {
+    let { email, password } = loginForm.value;
+    return this.http.post(AppConstants.loginUser(), {
       'username': email,
       password
-    }).subscribe(res => this.setSession(res));
+    })
+
+
   }
 
-  private setSession(authResult) {
-
+  setSession(authResult) {
     let claim = this.decodeJwt(authResult.token);
     console.log(claim);
     // claim.id;
@@ -79,13 +82,21 @@ export class AuthService {
 
     const expiresAt = moment().add(claim.exp, 'milliseconds');
 
-    localStorage.setItem('id', ""+claim.id);
-    localStorage.setItem('role', ""+claim.role);
-    localStorage.setItem('token', ""+authResult.token);
-    localStorage.setItem("exp", ""+expiresAt.valueOf());
+    localStorage.setItem('id', "" + claim.id);
+    localStorage.setItem('role', "" + claim.role);
+    localStorage.setItem('token', "" + authResult.token);
+    localStorage.setItem("exp", "" + expiresAt.valueOf());
+    if (claim.role === "HR")
+      this.router.navigate(['hr']);
+    else if (claim.role === "INTERVIEWER")
+      this.router.navigate(['interviewer']);
+    else if (claim.role === "ADMIN")
+      this.router.navigate(['reports']);
+
+
   }
 
-  private decodeJwt(token){
+  private decodeJwt(token) {
     console.log(token)
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
