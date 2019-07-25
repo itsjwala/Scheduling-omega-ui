@@ -15,3 +15,8 @@
     opacity: 0.4;
     color: #7386D5;
 }
+
+.save{
+    float: right;
+    padding: 2px;
+}
