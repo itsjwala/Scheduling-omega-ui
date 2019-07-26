@@ -91,7 +91,7 @@ export class AuthService {
     else if (claim.role === "INTERVIEWER")
       this.router.navigate(['interviewer']);
     else if (claim.role === "ADMIN")
-      this.router.navigate(['reports']);
+      this.router.navigate(['reports/hr-reports']);
 
 
   }
