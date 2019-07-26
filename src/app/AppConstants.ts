@@ -5,7 +5,8 @@ export class AppConstants{
 
 
     // public static get baseURL(): string { return "http://localhost:8080/api"; }
-    public static get baseURL(): string { return "http://16fe000f.ngrok.io/api"; }
+    // public static get baseURL(): string { return "http://16fe000f.ngrok.io/api"; }
+    public static get baseURL(): string { return "http://54.213.86.209:8181/api"; }
     // public static get baseURL(): string { return 'http://localhost:8080/api'; }
 
     public static addScheduledSlotURL(a): string {
