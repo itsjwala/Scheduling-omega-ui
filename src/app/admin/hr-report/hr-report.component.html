@@ -16,13 +16,16 @@
         <button class="btn btn-info" (click)="exportExcel()">Export Excel</button>
     </div>
 </div>
-<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
-    <p style="font-size: 20px; color: white">Loading...</p>
-</ngx-spinner>
+
 <!-- <pre>
     {{rowData |json}}
     </pre> -->
 <span class="heading" *ngIf="rowData">* double click field to edit</span>
-<ag-grid-angular #agGrid *ngIf="rowData" class="ag-theme-balham table" [rowData]="rowData" [gridOptions]="gridOptions"
-    [columnDefs]="gridOptions.columnDefs">
+<ag-grid-angular style="height:25rem" #agGrid *ngIf="rowData" class="ag-theme-balham table" [rowData]="rowData" [gridOptions]="gridOptions"
+    [columnDefs]="columnDefs">
 </ag-grid-angular>
+
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

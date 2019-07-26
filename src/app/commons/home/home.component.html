@@ -2,8 +2,8 @@
     <!-- Sidebar  -->
     <nav id="sidebar" [ngClass]="sideBar? 'active': ''">
         <div class="sidebar-header" (click)="toggleSidebar()">
-            <h3>Bootstrap Sidebar</h3>
-            <strong>BS</strong>
+            <h3>Scheduling Omega</h3>
+            <strong><img clas="img-thumbnail"src="../../../assets/logo.png"></strong>
         </div>
 
         <ul class="list-unstyled components">
@@ -13,36 +13,6 @@
                     Home
                 </a>
             </li>
-
-            <!-- <a href="#reportsSubMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fa fa-briefcase"></i>
-                    Reports
-                </a>
-                <ul class="collapse list-unstyled" id="reportsSubMenu">
-                    <li>
-                        <a routerLink='interviewer-reports'>Interviewer</a>
-                    </li>
-                    <li>
-                        <a routerLink='hr-reports'>HR</a>
-                    </li>
-                </ul> -->
-            <!-- <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fa fa-copy"></i>
-                    Actions
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a routerLink="#">Dashboard</a>
-                    </li>
-                    <li *ngIf="authService.getRole() === 'INTERVIEWER' ">
-                        <a [routerLink]='authService.getRole().toLowerCase()'>Schedule Slot</a>
-                    </li>
-                    <li>
-                        <a routerLink="previous">Previous Schedule</a>
-                    </li>
-                </ul>
-            </li> -->
 
 
             <li>

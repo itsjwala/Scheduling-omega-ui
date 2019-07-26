@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="hr-reports" routerLinkActive #rla="routerLinkActive">
+        HR Report
+    </a>
+    <a mat-tab-link routerLink ="interviewer-reports" routerLinkActive #rla="routerLinkActive" >
+
+        Interviewer Report
+    </a>
+</nav>
+<div class="container mt-2">
+
+    <router-outlet></router-outlet>
+
+</div>

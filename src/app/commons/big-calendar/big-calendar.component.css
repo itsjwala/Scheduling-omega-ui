@@ -4,3 +4,9 @@ p-fullCalendar::ng-deep .fc-time-grid .fc-slats td{
 p-fullCalendar::ng-deep .fc-time-grid .fc-slats td span{
     font-size: 0.8rem;
 }
+
+
+.fc-today
+{
+  background-color:inherit !important;
+}

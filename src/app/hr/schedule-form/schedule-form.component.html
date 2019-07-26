@@ -1,7 +1,7 @@
 <div #content class="form-modal">
     <div class="modal-header">
         <h4 *ngIf="data.isAvailable" class="modal-title heading" id="modal-basic-title">Schedule Interview</h4>
-        <h4 *ngIf="!data.isAvailable" class="modal-title heading" id="modal-basic-title">Cancel Interview</h4>
+        <h4 *ngIf="!data.isAvailable" class="modal-title heading" id="modal-basic-title">Scheduled Interview</h4>
         <button type="button" class="close" aria-label="Close" (click)="modalClose('close')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -44,10 +44,10 @@
             <hr>
             <div>
                 <mat-form-field class="example-full-width" style="width: 48%">
-                    <input [readonly]="!data.isAvailable" matInput placeholder="Candidate Name"
+                        <input [readonly]="!data.isAvailable" matInput placeholder="Candidate Name"
                         formControlName="candidateName" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getCandidateName($event.option.value)'>
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getCandidateName($event.option.value)'>
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                             {{option}}
                         </mat-option>
                     </mat-autocomplete>
@@ -56,24 +56,32 @@
                 &nbsp;
 
                 <mat-form-field class="example-full-width" style="width: 30%">
-                    <input [readonly]="!data.isAvailable" matInput type="number" placeholder="Phone"
+                        <input [readonly]="!data.isAvailable" matInput type="number" placeholder="Phone"
                         formControlName="candidatePh">
                 </mat-form-field>
             </div>
             &nbsp;
 
-            <input [readonly]="!data.isAvailable" placeholder="CV" formControlName="candidateCV"> &nbsp;
+            <div *ngIf="false">
+                <input [readonly]="!data.isAvailable" placeholder="CV" formControlName="candidateCV"> &nbsp;
 
-            <button type="button" class="btn btn-primary" (click)=scheduleFormSubmit($event)>Upload</button>
+                <button type="button" class="btn btn-primary" (click)=scheduleFormSubmit($event)>Upload</button>
+            </div>
+
 
             <mat-form-field class="example-full-width">
                 <textarea [readonly]="!data.isAvailable" matInput placeholder="Description"
                     formControlName="interviewDescr">
-                    </textarea>
+                </textarea>
             </mat-form-field>
+
+            <hr>
+
+            <h4 *ngIf="!data.isAvailable" class="modal-title heading" id="modal-basic-title">Cancel this Interview?</h4>
+
             <mat-form-field *ngIf="!data.isAvailable" class="example-full-width">
                 <textarea [formControl]="cancellationReason" matInput
-                    placeholder="Enter cancellation reason"></textarea>
+                placeholder="Enter cancellation reason"></textarea>
             </mat-form-field>
         </form>
 
@@ -81,9 +89,9 @@
 
 
         <button *ngIf="data.isAvailable" class="btn btn-dark submit-form" (click)="modalClose('submit')"
-            [disabled]="!scheduleForm.valid">Schedule</button>
+        [disabled]="!scheduleForm.valid">Schedule</button>
         <button *ngIf="!data.isAvailable" [disabled]="!cancellationReason.valid" class="btn btn-danger submit-form"
-            (click)="modalClose('delete')">Delete</button>
+            (click)="modalClose('delete')">Cancel Interview</button>
     </div>
 </div>
 

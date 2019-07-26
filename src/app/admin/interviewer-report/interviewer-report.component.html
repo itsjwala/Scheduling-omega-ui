@@ -28,6 +28,6 @@
     <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 <span class="heading" *ngIf="this.rowData">* double click field to edit</span>
-<ag-grid-angular #agGrid (gridReady)="onGridReady($event)" *ngIf="this.rowData" class="ag-theme-balham table" [rowData]="rowData" [gridOptions]="gridOptions"
+<ag-grid-angular #agGrid style="height:25rem" (gridReady)="onGridReady($event)" *ngIf="this.rowData" class="ag-theme-balham table" [rowData]="rowData" [gridOptions]="gridOptions"
     [columnDefs]="gridOptions.columnDefs">
 </ag-grid-angular>

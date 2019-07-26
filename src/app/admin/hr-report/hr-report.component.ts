@@ -44,11 +44,16 @@ export class HrReportComponent implements OnInit {
   constructor(private http: HttpClient, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+
+
   }
 
   onGridReady(params) {
     console.log(params);
     this.gridApi = params.api;
+
+    // this.gridApi.setGridAutoHeight(true)
+
     // this.gridApi = params.columnApi;
     console.log(this.gridApi);
   }

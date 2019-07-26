@@ -53,7 +53,7 @@ export class PreviousScheduleComponent implements OnInit {
     { headerName: 'date', field: 'scheduleResponseDTO.slot.date', sortable: true, filter: true },
     { headerName: 'from', field: 'scheduleResponseDTO.slot.from', sortable: true, filter: true },
     { headerName: 'to', field: "scheduleResponseDTO.slot.to", sortable: true, filter: true },
-    { headerName: 'interviewer name', field: "scheduleResponseDTO.slot.interviewerName", sortable: true, filter: true },
+    { headerName: 'interviewer name', field: "scheduleResponseDTO.interviewerName", sortable: true, filter: true },
     { headerName: 'tech', field: 'scheduleResponseDTO.technology', sortable: true, filter: true },
     { headerName: 'round', field: 'scheduleResponseDTO.level', sortable: true, filter: true },
     { headerName: 'name', field: 'scheduleResponseDTO.candidate.name', sortable: true, filter: true },
