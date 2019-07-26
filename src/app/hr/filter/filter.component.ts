@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit {
   filteredInterviewerNames: Observable<String[]>
   interviewerNames = []
   filterForm: FormGroup;
-  errors = {}
+  errors:any = {}
 
   constructor(private filterService: FilterService, private fb: FormBuilder) { }
 

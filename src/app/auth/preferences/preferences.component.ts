@@ -18,7 +18,7 @@ export class PreferencesComponent implements OnInit {
   techs = [];
   levels = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient, 
+  constructor(private fb: FormBuilder, private http: HttpClient,
     private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -45,7 +45,14 @@ export class PreferencesComponent implements OnInit {
           'id': e.id,
           'technology': tech
         });
-    });
+    }); this.http.get(AppConstants.getLevelsURL).subscribe((e: any) => {
+      this.filteredOptionsLevel = e;
+    })
+
+    AuthService
+    this.http.get(AppConstants.getTechsURL).subscribe((e: any) => {
+      this.filteredOptionsTech = e;
+    })
   }
 
   getLevel(level) {

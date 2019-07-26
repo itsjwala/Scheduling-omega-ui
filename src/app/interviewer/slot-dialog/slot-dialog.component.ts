@@ -18,7 +18,7 @@ export class SlotDialogComponent implements OnInit {
   viewTo;
   cancellationReason;
 
-  constructor(private dialogRef: MatDialogRef<SlotDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<SlotDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     if (data.showDelete) {
       this.isAvailableSlot = data.event.event.extendedProps.availableSlot !== undefined;
       this.props = data.event.event.extendedProps;

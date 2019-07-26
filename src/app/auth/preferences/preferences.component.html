@@ -5,7 +5,7 @@
                 <img src="../../../assets/img-01.png" alt="IMG" class="animated bounce delay-3s infinite">
             </div>
 
-            <form class="login100-form validate-form" [formGroup]="preferencesForm" (submit)="registerUser($event)">
+            <form class="login100-form validate-form" [formGroup]="preferencesForm" (submit)="preferencesFormSubmit($event)">
                 <span class="login100-form-title">
                     Interviewer Register
                 </span>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" 
+                    <button class="login100-form-btn"
                         (click)="preferencesFormSubmit($event)">
                         Submit
                     </button>
